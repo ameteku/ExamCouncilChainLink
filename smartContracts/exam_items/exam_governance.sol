@@ -1,8 +1,5 @@
 pragma solidity >=0.7.0 <0.8.0;
 
-struct  Exam {
-    string  id;
-}
 
 contract ExamCouncil {
     
@@ -13,6 +10,7 @@ contract ExamCouncil {
     constructor (string memory candidateIds, string memory firstExamId) public {
         require(bytes(candidateIds).length != 0);
         require( bytes(firstExamId).length != 0);
+
         
         //for( int i = 0; i<5 ; i++) {
             candidates.push(candidateIds);
