@@ -9,6 +9,7 @@ struct ExamQuestion {
 
 contract Exam {
     uint id;
+    
     address public creatorSignator;
     ExamQuestion[] questions;
     
