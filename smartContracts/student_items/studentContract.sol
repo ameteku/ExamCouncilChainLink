@@ -64,8 +64,12 @@ uint overallScore;
  	return (firstName, lastName, photoLink, signature);
   	}
 
+  function getScore() public view returns(uint) {
+    return score;
+  }
+  
   // have to review access again
-  function setOverallScore () public returns(bool) {
+  function setOverallScore (uint score) public returns(bool) {
     //figure out how to verify sender is exam org boss
     // require(msg.sender == );
   }
