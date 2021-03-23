@@ -56,6 +56,7 @@ A smart contract retrieves the grades for each id number, does the final calcula
  
 Exam -1
 Verifying - 1,1, 1
+
 Parts Needed:
 Blockchain( ethereum)
 Blockchain Database  for storing questions and info of students(image, name, school, etc)
