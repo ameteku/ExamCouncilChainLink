@@ -62,11 +62,17 @@ Blockchain( ethereum)
 Blockchain Database  for storing questions and info of students(image, name, school, etc)
 Chainlink verifiable random numbers
 One large smart contract or 4 separate ones for each process of the examination.
+
 UI for pushing the data of the student, and returning their unique id. 
+
 UI for displaying the randomized questions selected by the blockchain and for submission of exam
+
 UI for teachers to mark the exams online and submit the scores
+
 UI to display marks given by teachers
-UI to display a students allocation upon entry of their unique id. 
+
+UI to display a students allocation upon entry of their unique id.
+
 
 ![Untitled Diagram](https://user-images.githubusercontent.com/31578930/112093239-70800180-8b6f-11eb-914b-8b509c8c3078.jpg)
 
