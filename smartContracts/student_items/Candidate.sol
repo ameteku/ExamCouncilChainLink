@@ -11,27 +11,26 @@ contract Candidate {
     uint randomIdFromVRF;
     string studentSignature;
     address candidateAddy;
-    address studentAddy;
+    address examOrgAddy;
     string examId;
     uint score;
     string[] studentHashedAnswers;
 
     
-  constructor(string memory signature,string memory exam, address stdAddy) public {
+  constructor(string memory signature, string memory exam, address examOAddy) public {
       require(bytes(signature).length != 0);
       randomIdFromVRF = 1;
-      studentAddy = stdAddy;
+      examOrgAddy = examOAddy; //willbe used as verification for some functions
       candidateAddy = msg.sender;
       studentSignature = signature;
       examId = exam;
   }
 
-  function sendStudentScore() public returns (bool) {
+  function getScore() public view returns (uint) {
       require(msg.sender == candidateAddy);
-   // uint studentScore = studentAddy.call(bytes4(keccak256("getScore()")));
-        uint studentScore;
-      // updating value of score in students instance
-      studentScore += score;
+  
+    // return candiate score
+    return score;
       
      // studentAddy.call(bytes4(keccak256("setOverallScore(uint256)")), studentScore);
   }
