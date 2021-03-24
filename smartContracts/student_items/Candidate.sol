@@ -48,6 +48,7 @@ contract Candidate {
         }
     }
   }
+
 }
 //   function getParticularExam(uint candidateId, string memory examId ) public view returns(Exam memory) {
 //       require(keccak256(abi.encodePacked(candidateId)) == keccak256(abi.encodePacked(id)));
