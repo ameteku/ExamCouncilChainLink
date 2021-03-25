@@ -9,9 +9,10 @@ struct ExamQuestion {
 
 contract Exam {
     uint id;
-    
     address public creatorSignator;
     ExamQuestion[] questions;
+    uint[]  questionNumbers;
+
     
     constructor (string memory firstQuestion, string memory answer, address bossMan) public {
        require(bytes(firstQuestion).length != 0);
@@ -66,7 +67,49 @@ contract Exam {
         }
         
     }
-    
-    
+
+    // this is option two where if the questions were stored of chain , each of them will be numbered and their range of numbers willcbe passed as an argument
+    //into this function alongside the total number of questions needed. This will randomly select the questions to be used on the exam and send the selections back
+    function generateQuestions(uint totalExamQuestions, uint[2] questionNumberRange) public returns(uint[], bool) {
+        require(creatorSignator == msg.sender);
+        require(totalExamQuestions != 0);
+        require(questionNumberRange.length == 2);
+
+        uint questionSelected;
+        uint[] examQuestions;
+        for(uint i =0; i <totalExamQuestions;) {
+            bool duplicate = false;
+            questionSelected = 200000000 % questionNumberRange[1];
+
+            for(uint b = 0; b< questions.length ; b++) {
+                if(questions[b].id == questionSelected) {
+                    duplicate = true;
+                    break;
+                }  
+            }
+            if(!duplicate) {
+                questionNumbers.push(Examquestion(questionSelected, ' ', ' ');
+                examQuestions.push(questionSelected);
+                i++;
+                duplicate = false;
+            }
+        }
+
+        return  (examQuestions, true);
+    }
+
+    function setAnswers(string[] memory answers, ) public returns(string memory, bool) {
+        require(creatorSignator == msg.sender);
+        
+        if(answers.length != questions.length) {
+            return ("Answer range not same as question range. Send total range (set unaswered questions as null if not answered)", false);
+        }
+
+        for(uint i = 0 ; i < answers.length; i++) {
+            questions[i].answer = answers[i];
+        }
+
+        return ("Successfully written to memory", true);
+    }
     
 }
