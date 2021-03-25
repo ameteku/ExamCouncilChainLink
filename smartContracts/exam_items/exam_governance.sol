@@ -1,23 +1,28 @@
 pragma solidity >=0.7.0 <0.8.0;
-
+import './Exam.sol';
+import './Candidate.sol';
 
 contract ExamCouncil {
-    
-    string[] candidates;
-    string[] examIds;
+    address bossAddy;
+    Candidate[] candidates;
     Exam[] exams;
+    string[] examIds;
     
     constructor (string memory candidateIds, string memory firstExamId) public {
-        require(bytes(candidateIds).length != 0);
-        require( bytes(firstExamId).length != 0);
+        // require(bytes(candidateIds).length != 0);
+        // require( bytes(firstExamId).length != 0);
 
+                    if(bytes(firstExamId).length != 0) {
+                         exams.push( Exam(msg.sender));
+                        //  uint ids = exams[0].getId();
+                        //     examIds.push(ids);
+                    }
         
         //for( int i = 0; i<5 ; i++) {
-            candidates.push(candidateIds);
+            candidates.push(new Candidate("dfd", "chem1",bossAddy));
         //}
         
-        exams.push( Exam(firstExamId));
-        examIds.push(firstExamId);
+       
     }
     
     function writeExam(string memory candidateId, string memory fingerprint, string memory examId) 
