@@ -14,12 +14,12 @@ contract Exam {
     uint[]  questionNumbers;
 
     
-    constructor (string memory firstQuestion, string memory answer, address bossMan) public {
-       require(bytes(firstQuestion).length != 0);
-        require(bytes(answer).length != 0);
+    constructor (address bossMan) public {
+       //require(bytes(firstQuestion).length != 0);
+        //require(bytes(answer).length != 0);
         require(bossMan != address(0));
         
-        questions.push(ExamQuestion(101,firstQuestion, answer));
+        //questions.push(ExamQuestion(101,firstQuestion, answer));
         // answers.push(answer);
         creatorSignator = bossMan;
         id = 200; //will be using chainlink vrf for this
@@ -70,13 +70,13 @@ contract Exam {
 
     // this is option two where if the questions were stored of chain , each of them will be numbered and their range of numbers willcbe passed as an argument
     //into this function alongside the total number of questions needed. This will randomly select the questions to be used on the exam and send the selections back
-    function generateQuestions(uint totalExamQuestions, uint[2] questionNumberRange) public returns(uint[], bool) {
+    function generateQuestions(uint totalExamQuestions, uint[2] memory questionNumberRange) external returns(uint[] memory, bool) {
         require(creatorSignator == msg.sender);
         require(totalExamQuestions != 0);
         require(questionNumberRange.length == 2);
 
         uint questionSelected;
-        uint[] examQuestions;
+        //uint[] memory examQuestions;
         for(uint i =0; i <totalExamQuestions;) {
             bool duplicate = false;
             questionSelected = 200000000 % questionNumberRange[1];
@@ -88,17 +88,17 @@ contract Exam {
                 }  
             }
             if(!duplicate) {
-                questionNumbers.push(Examquestion(questionSelected, ' ', ' ');
-                examQuestions.push(questionSelected);
+                questions.push(ExamQuestion(questionSelected, "", ""));
+                questionNumbers.push(questionSelected);
                 i++;
                 duplicate = false;
             }
         }
 
-        return  (examQuestions, true);
+        return  (questionNumbers, true);
     }
 
-    function setAnswers(string[] memory answers, ) public returns(string memory, bool) {
+    function setAnswers(string[] memory answers ) public returns(string memory, bool) {
         require(creatorSignator == msg.sender);
         
         if(answers.length != questions.length) {
