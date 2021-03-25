@@ -11,11 +11,10 @@ string lastName;
 string photoLink;
 string[] schoolChoices;
 address publicAddress;
-string privateKey;
-string publicKey;
 string signature;
 uint candidateId;
 uint overallScore;
+address[] candidateAddresses;
 
 
   constructor(string memory fName, string memory lname, string memory sig, string memory photo, string[] memory schools ) public {
@@ -42,9 +41,11 @@ uint overallScore;
     require( bytes(examId).length != 0);
 
     // call bool success =  examOrg.addCandidate();
+    // considering returning the address of each candidate
     bool success = true;
     // assuming this returns a boolean
     if(success) {
+      //candidateAddresses.push()
       return ("Successfully registered for exam", true);
     }
 
@@ -64,9 +65,23 @@ uint overallScore;
  	return (firstName, lastName, photoLink, signature);
   	}
 
-  function getScore() public view returns(uint) {
-    return score;
-  }
+  // this will use the address of each candidate stored to get and combine for the overall score of the student
+  function getScore() public view returns(string memory, uint) {
+    uint score = 0;
+    if(candidateAddresses.length ==0) {
+      return ("No candidate score yet", 0);
+    }
+
+    for(uint i =0; i < candidateAddresses.length; i++)
+       {
+         // score += getCandidateScore(candidateAddresses[i]);
+       }
+      return ("Succes",score);
+    }
+
+  function getCandidateScore(address candidateAddy) internal returns(uint) {
+        return 10;
+  } 
   
   // have to review access again
   function setOverallScore (uint score) public returns(bool) {
