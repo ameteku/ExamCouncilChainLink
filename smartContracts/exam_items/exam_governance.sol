@@ -1,12 +1,15 @@
 pragma solidity >=0.7.0 <0.8.0;
 import './Exam.sol';
 import './Candidate.sol';
+import './markers.sol';
 
 contract ExamCouncil {
     address bossAddy;
     Candidate[] candidates;
     Exam[] exams;
     string[] examIds;
+
+    Marker[] markers;
     
     constructor (string memory candidateIds, string memory firstExamId) public {
         // require(bytes(candidateIds).length != 0);
