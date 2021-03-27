@@ -14,6 +14,7 @@ string firstName;
 string lastName;
 string photoLink;
 School[4] schoolChoices;
+address[4] schoolsRegistered;
 address publicAddress;
 string signature;
 uint candidateId;
@@ -36,6 +37,8 @@ address[] candidateAddresses;
     if(schools.length!= 0) {
       for(uint i = 0; i <4; i++) {
         schoolChoices[i] = School(schools[i],false);
+        // this registers the student in each of the school
+        //schoolGovAddress.call(registerStudentInSchools(schools);
       }
     }
 
@@ -97,6 +100,10 @@ address[] candidateAddresses;
   function setOverallScore (uint score) public returns(bool) {
     //figure out how to verify sender is exam org boss
     // require(msg.sender == );
+  }
+  
+  function checkSchoolsAccepted() public {
+      
   }
 
    

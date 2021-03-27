@@ -17,12 +17,12 @@ contract Candidate {
     string[] studentHashedAnswers;
 
     
-  constructor(string memory signature, string memory exam, address examOAddy) public {
-      require(bytes(signature).length != 0);
+  constructor(address studentAddy, string memory exam, address examOAddy) public {
+      //require(bytes(signature).length != 0);
       randomIdFromVRF = 1;
       examOrgAddy = examOAddy; //willbe used as verification for some functions
       candidateAddy = msg.sender;
-      studentSignature = signature;
+      //studentSignature = signature;
       examId = exam;
   }
 
@@ -65,5 +65,5 @@ contract Candidate {
       
 //       return empty;
 //   }
-}
+
 

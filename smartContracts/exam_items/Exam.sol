@@ -112,4 +112,9 @@ contract Exam {
         return ("Successfully written to memory", true);
     }
     
+    function getId() public view returns(uint) {
+        require(msg.sender == creatorSignator);
+        return id;
+    }
+    
 }
