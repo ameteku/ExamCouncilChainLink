@@ -1,6 +1,10 @@
 pragma solidity >=0.7.0 <0.8.0;
 pragma experimental ABIEncoderV2;
 
+struct School {
+  string schoolName;
+  bool accepted;
+}
 
 /**
  * The  Student contract does this and that...
@@ -9,7 +13,7 @@ contract  Student {
 string firstName;
 string lastName;
 string photoLink;
-string[] schoolChoices;
+School[4] schoolChoices;
 address publicAddress;
 string signature;
 uint candidateId;
@@ -17,19 +21,21 @@ uint overallScore;
 address[] candidateAddresses;
 
 
-  constructor(string memory fName, string memory lname, string memory sig, string memory photo, string[] memory schools ) public {
+  constructor(string memory fName, string memory lname, string memory sig, string memory photo, string[4] memory schools ) public {
       require(bytes(fName).length!= 0);
       require(bytes(lname).length!= 0);
       require(bytes(sig).length!= 0);
       require(bytes(photo).length!= 0);
+      
     publicAddress = msg.sender;
     firstName = fName;
     lastName = lname;
     signature = sig;
     photoLink =photo;
+    
     if(schools.length!= 0) {
-      for(uint i = 0; i <schools.length; i++) {
-        schoolChoices.push(schools[i]);
+      for(uint i = 0; i <4; i++) {
+        schoolChoices[i] = School(schools[i],false);
       }
     }
 
@@ -54,13 +60,17 @@ address[] candidateAddresses;
   }
 
 // retrieves the schools student selected
-  function getSchoolsSelected() public view returns (string[] memory , bool) {
-    return (schoolChoices, true);
+  function getSchoolsSelected() public view returns (string[4] memory , bool) {
+      string[4] memory names;
+      for(uint i = 0; i< 4; i++) {
+          names[i] = schoolChoices[i].schoolName;
+      }
+    return (names, true);
   }
 
   // only the student access this info
  function getStudentInfo () public view returns(string memory, string memory, string memory, string memory) {
-  	//require(keccak256(abi.encodePacked(_sig)) == keccak256(abi.encodePacked(signature)));
+  	require(msg.sender ==publicAddress);
     require( publicAddress == msg.sender);
  	return (firstName, lastName, photoLink, signature);
   	}
@@ -88,5 +98,6 @@ address[] candidateAddresses;
     //figure out how to verify sender is exam org boss
     // require(msg.sender == );
   }
-  	  
+
+   
 }
