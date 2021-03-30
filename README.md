@@ -39,7 +39,7 @@ Steps:
 Each student can be given a unique id by a smart contract where only the smart contract knows the information of the students. 
 
 For selection of questions:
- Each question in the question pool can be given a unique number. Then a smart contract not manipulated by anyone can be given the range of numbers and total number of questions to select for each section through randomness on the day of the exam. 
+ Each question in the question pool can be given a unique number. Then a smart contract using ChainLinks VRF, can be given the range of numbers assigned to the questions and the total number of questions to select for each section through randomness on the day of the exam. 
 Or for a more complex way, because the exams are online, each student gets a question given to them by the smart contract and this question is stored alongside their id.
 For identification of students:
 Each student will be given that unique id the contract assigned their info. Upon arrival to the test centre, all the student needs to do is secretly enter their id/ fingerprint  into the smart contract using a UI. The smart contract returns  the face of the student and the examiner uses that to verify that the student is indeed not a fake (LOL).
