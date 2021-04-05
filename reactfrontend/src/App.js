@@ -8,6 +8,7 @@ import Register from "./Register";
 import Student from "./Student";
 import Scores from "./Scores";
 import ExamRegister from "./ExamRegister";
+
 function App() {
   return (
     <div className="App">
