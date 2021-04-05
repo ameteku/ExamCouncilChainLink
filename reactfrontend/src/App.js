@@ -10,6 +10,7 @@ import Scores from "./Scores";
 import ExamRegister from "./ExamRegister";
 
 function App() {
+  
   return (
     <div className="App">
       <Route exact path="/" component={Home}/>
