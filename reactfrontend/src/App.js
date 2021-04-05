@@ -6,7 +6,8 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import Student from "./Student";
-
+import Scores from "./Scores";
+import ExamRegister from "./ExamRegister";
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,8 @@ function App() {
       <Route exact path="/login" component={Login}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/student/home" component={Student}/>
+      <Route exact path="/student/scores" component={Scores}/>
+      <Route exact path="/student/examregister" component={ExamRegister}/>
     </div>
   );
 }
