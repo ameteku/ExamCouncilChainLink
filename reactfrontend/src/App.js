@@ -8,17 +8,18 @@ import Register from "./Register";
 import Student from "./Student";
 import Scores from "./Scores";
 import ExamRegister from "./ExamRegister";
+import ExamSelect from "./ExamSelect";
 
 function App() {
   
   return (
     <div className="App">
-      <Route exact path="/" component={Home}/>
-      <Route exact path="/login" component={Login}/>
+      <Route exact path="/" component={Login}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/student/home" component={Student}/>
       <Route exact path="/student/scores" component={Scores}/>
       <Route exact path="/student/examregister" component={ExamRegister}/>
+      <Route exact path="/student/examselect" component={ExamSelect}/>
     </div>
   );
 }

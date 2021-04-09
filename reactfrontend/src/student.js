@@ -1,5 +1,7 @@
 import React from "react";
 import './Student.css';
+import {Link} from "react-router-dom";
+import Scores from "./Scores";
 
 function Student(){
     const [firstName,changeFirstName] = React.useState("Gianna");
@@ -8,7 +10,7 @@ function Student(){
         <div>
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Name of App</a>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Name_of_App</a>
                 <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -40,28 +42,19 @@ function Student(){
                     
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="https://images.all-free-download.com/images/graphicthumb/forest_vector_6816406.jpg" alt="..." />
+                        <h2><Link to="/student/examregister">Register Your Exams</Link></h2>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="https://images.all-free-download.com/images/graphicthumb/forest_vector_6816406.jpg" alt="..." />
+                        <h2><Link to="/student/examselect">Write Your Exams</Link></h2>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="https://images.all-free-download.com/images/graphicthumb/forest_vector_6816406.jpg" alt="..." />
+                            <h2><Link to="/student/scores">View Your Scores</Link></h2>
                         </div>
                     </div>
                 </div>
