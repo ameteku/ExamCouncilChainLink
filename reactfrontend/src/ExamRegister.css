@@ -36,3 +36,15 @@
     margin-right: 10px;
     justify-content: center;
   }
+
+.table th {
+    text-align: center;
+}
+
+.table {
+    border-radius: 5px;
+    width: 50%;
+    float: none;
+    margin: auto;
+    margin-top: 50px;
+}
