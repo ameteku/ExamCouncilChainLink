@@ -121,8 +121,7 @@
 
   .examsList  {
       margin: auto;
-      width: 50%;
-      border: solid mediumaquamarine;
+      width: 30%;
       border-radius: 0.5em;
       margin-bottom: 0px;
       padding-bottom: 0px;
@@ -135,7 +134,7 @@
        
   }
  .examItem:hover{
-        background-color: mediumaquamarine;
+        background-color: #b5838d;
         color: white;
         text-decoration: none;
   }

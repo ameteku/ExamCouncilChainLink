@@ -4,21 +4,28 @@ import {Link} from "react-router-dom";
 
 
 function ExamSelect(){
+    
     function makeListItem(exam){
+        const examDetails = {
+            examName: exam.examName,
+            examID: exam.examID,
+        }
         return (
-            <Link style={{ textDecoration: 'none' }} to="/student/examwrite"><li className="examItem">{exam.examName}</li></Link>
+            <Link style={{ textDecoration: 'none' }} 
+            to="/student/examwrite" to={{ 
+            pathname: "/student/examwrite", 
+            examDetails}}>
+            <p className="examItem examToRegister">{exam.examName}</p></Link>
         )
     }
 
     return (
         <div>
             <div className="header">
-                <h2>Select your exams</h2>
+                <h1>Select your exam</h1>
             </div>
             <div className="examsList">
-                <ul className="list-unstyled">
-                    {exams.map(makeListItem)}
-                </ul>
+                {exams.map(makeListItem)}
             </div>
         </div>
     )

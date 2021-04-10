@@ -5,18 +5,27 @@ import './ExamRegister.css';
 function ExamRegister(){
     //fetch from database and use as React state
     const [examsID,changeExamsID] = React.useState([]);
-    const [currentExamID,updateCurrentExamID] = React.useState("");
-
-    function onAdd(exam){
-        changeExamsID(prevExams => {
-            return [...prevExams,exam];
-        })
-        updateCurrentExamID("");
+    function containsObject(obj, list) {
+        var i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i] === obj) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    function updateState(event) {
-        updateCurrentExamID(event.target.value);
-      }
+    function onAdd(exam){
+        if (containsObject(exam,examsID)){
+            alert("You've already picked this");
+        }
+        else {
+            
+            changeExamsID(prevExams => {
+                return [...prevExams,exam];
+            })
+        }
+    }
 
     function removeExam(name) {
         changeExamsID((prevExams) => {
@@ -52,6 +61,7 @@ function ExamRegister(){
                             <div class="dropdown-content">
                                 <a onClick={()=>onAdd("Geography")}>Geography</a>
                                 <a onClick={()=>onAdd("History")}>History</a>
+                                <a onClick={()=>onAdd("Math")}>Math</a>
                             </div>
                         </div>
                     </div>

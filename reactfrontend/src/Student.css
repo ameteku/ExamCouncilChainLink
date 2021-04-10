@@ -55,18 +55,15 @@ html {
 }
 
 .option1 {
-  border: solid;
   padding: 10px;
   border-radius: 0.75em;
 }
 
 .option2 {
-  border: solid;
   padding: 10px;
   border-radius: 0.75em;
 }
 .option3 {
-  border: solid;
   padding: 10px;
   border-radius: 0.75em;
 }
@@ -174,7 +171,7 @@ sup {
 }
 
 a {
-  color: #1abc9c;
+  color: #000;
   text-decoration: none;
   background-color: transparent;
 }
