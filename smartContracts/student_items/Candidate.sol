@@ -1,4 +1,4 @@
-pragma solidity >=0.7.0 <0.8.0;
+pragma solidity >=0.6.0 <0.8.0;
 pragma experimental ABIEncoderV2;
 
 /**
@@ -13,8 +13,8 @@ contract Candidate {
     address candidateAddy;
     address examOrgAddy;
     string examId;
-    uint score;
-    string[] studentHashedAnswers;
+    uint[] scores;
+    string answersIPFSLink;
 
     
   constructor(address studentAddy, string memory exam, address examOAddy) public {
@@ -26,27 +26,25 @@ contract Candidate {
       examId = exam;
   }
 
-  function getScore() public view returns (uint) {
-      require(msg.sender == candidateAddy);
-  
+  function getScores() public view returns (uint [] memory) {
+      
     // return candiate score
-    return score;
+    return scores;
       
      // studentAddy.call(bytes4(keccak256("setOverallScore(uint256)")), studentScore);
   }
   
-  function setScore() public returns (uint number) {
-    require(msg.sender == candidateAddy);
-    score = number;
+  //used by marker to add score of students
+  function setScore(uint[] memory answerScores) public returns (bool) {
+   // require(msg.sender == candidateAddy, "No");
+   for(uint i = 0; i< answerScores.length; i++) {
+       scores.push(answerScores[i]);
+   }
   }
 
-  function setAnswerhashes (string[] memory answers) public  {
-    require(msg.sender == candidateAddy);
-    if(answers.length != 0) {
-        for(uint i =0; i <answers.length; i++) {
-        studentHashedAnswers.push(answers[i]);
-        }
-    }
+  function setAnswerhash (string memory IPFSLink) public  {
+    require(msg.sender == candidateAddy, "Not the candidate");
+    answersIPFSLink = IPFSLink;
   }
 
 }
