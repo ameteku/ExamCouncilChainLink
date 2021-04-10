@@ -4,7 +4,7 @@ import './ExamRegister.css';
 
 function ExamRegister(){
     //fetch from database and use as React state
-    const [examsID,changeExamsID] = React.useState(["hi","haruman"]);
+    const [examsID,changeExamsID] = React.useState([]);
     const [currentExamID,updateCurrentExamID] = React.useState("");
 
     function onAdd(exam){
@@ -28,9 +28,9 @@ function ExamRegister(){
 
     function makeListItem(name) {
         return (
-          <li key={name} onClick={() => removeExam(name)}>
+          <p className="examToRegister" key={name} onClick={() => removeExam(name)}>
             {name}
-          </li>
+          </p>
         );
     }
     
@@ -40,21 +40,22 @@ function ExamRegister(){
                 <div className="row">
                     <div className="col-lg-12 text-center">
                         <h1 className="mt-5">Exam Registration</h1>
-                        <ul className="list-unstyled">
+                        <div className="examsToRegister">
                         {examsID.map(makeListItem)}
-                        </ul>
-                    </div>
-                </div>
-                <div className="row">
-                <div className="col-lg-12 text-center">
-                    <div className="input-group">
-                        <div className="inputAdd">
-                            <input value={currentExamID} onChange={updateState}/>
-                            <div className="button" onClick={() => onAdd(currentExamID)}>Add</div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div className="row">
+                    <div className="col-lg-12 text-center">
+                        <div class="dropdown">
+                            <button class="dropbtn">Add</button>
+                            <div class="dropdown-content">
+                                <a onClick={()=>onAdd("Geography")}>Geography</a>
+                                <a onClick={()=>onAdd("History")}>History</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

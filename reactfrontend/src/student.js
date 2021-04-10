@@ -41,27 +41,25 @@ function Student(){
                 <div class="row justify-content-center">
                     
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+                        <div className="option1">
                         <h2><Link to="/student/examregister">Register Your Exams</Link></h2>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
+                        <div className="option2">
                         <h2><Link to="/student/examselect">Write Your Exams</Link></h2>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
+                        <div className="option3">
                             <h2><Link to="/student/scores">View Your Scores</Link></h2>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-       
-        
         <div class="copyright py-4 text-center text-white">
             <div class="container">
                 <small>
