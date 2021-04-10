@@ -105,4 +105,10 @@ mapping( address => Candidate) candidates;
         return examIds;
         
     }
+    
+    function submitAnswers(string memory ipfsLink) public returns (bool) {
+       require(candidates[msg.sender].setAnswerhash(ipfsLink));
+
+       return true;
+    }
 }
