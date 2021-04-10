@@ -8,6 +8,11 @@
     border-color: #1abc9c;
   }
 
+  .question {
+      text-align: left;
+      
+  }
+
   input {
     box-sizing: border-box;
     background-color: transparent;
@@ -18,8 +23,11 @@
     width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
-    
-
+  }
+  .questionAndAnswerPair{
+      margin:auto;
+      width:50%;
+      padding-top:200px;
   }
 
   .header {
@@ -42,7 +50,7 @@
       font-weight: bolder;
        
   }
- li:hover{
+ .examItem:hover{
         background-color: mediumaquamarine;
         color: white;
         text-decoration: none;
