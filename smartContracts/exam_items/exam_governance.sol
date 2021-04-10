@@ -79,7 +79,7 @@ mapping( address => Candidate) candidates;
         Candidate newCandidate = new Candidate(student, examId,bossAddy);
          address name = address(newCandidate);
         candidates[name] = newCandidate;
-       
+
         return name;
         }
         
@@ -94,9 +94,8 @@ mapping( address => Candidate) candidates;
     
     function addExam(string memory examId) public {
 
-        //require( msg.sender == bossAddy);
+
         exams[examId] = new Exam();
-        examIds.push(examId);
         
     }
     
