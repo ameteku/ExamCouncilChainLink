@@ -5,12 +5,13 @@ A proposed way of setting up and administering examinations using blockchain
 
 
 
-Unbiased examination point allocation:
-A blockchain where questions and answers from each student is recorded (without the students names) with their corresponding scores. This allows for teachers to give unbiased marks/scores to each students as the scores on each answer can be viewed by everyone and each answer checked against other answers. This also reduces the amount of time teachers need to meet with their students one on one to discuss what the correct answers are as a correct range of answers are already there.
-Each student can also be given a random verifiable number and key in order to ensure there is no theft  of someone's exam for another and can be used to create anonymity in a class setting where students do not want their teachers to know their grades.
+An unbiased and exam fraud prevention System:
 
-Ghana has a hooded way of examination marking for both high school and junior high school.  
-There has been a history of cheating scandals happening both within the headquarters of the institution and in the foregrounds or from the creation of the exam questions to the release of the results to the allocation of schools.
+The West African Examination Council(WAEC) which runs the multi national examination for both Junior High and Senior high schools has been using a failing system for sometime now. This has led to fraudulent practices at almost step in the process(from the creation of questions to the selection and acceptance of candidates into schools after the exams)  
+There has been a long history of cheating scandals happening both within the headquarters of the institution and on the foregrounds. This has led to the drastic reduction and loss of trust in cretificates gotten from the Examinations( Although it is supposed to be the national official criteria for getting into your next level of school). 
+Solving this problem will make the examination fair for every student, giving a chance to not only the people with power  but the entire body of candidates to pass and get into their dream schools.
+
+Below is a description of the problems we plan on tackling using blockchain technology through the transparency, fairness and immutability it provides.
 
 Problems:
 
@@ -22,7 +23,7 @@ Now during the time of the questions being printed and sent to the schools, peop
 
 
 Case 2:  
-After  the exam, students papers are gathered, sealed and sent over to the central authority. Once the papers of a particular subject is collected, they are redistributed to teachers who opt in to mark the exams. Although the papers gotten by teachers are somewhat randomized based on schools, it still gives room for falsification of grades by teachers as the names and schools are directly placed on the exam sheets( or answer sheets). There is also low transparency as. The papers of each student is not returned back to the student and we can therefore not know if it was graded right or wrong
+After the exam, students papers are gathered, sealed and sent over to the central authority. Once the papers of a particular subject is collected, they are redistributed to teachers who opt in to mark the exams. Although the papers gotten by teachers are somewhat randomized based on schools, it still gives room for falsification of grades by teachers as the names and schools are directly placed on the exam sheets( or answer sheets). There is also low transparency as. The papers of each student is not returned back to the student and we can therefore not know if it was graded right or wrong
 
 
 
@@ -38,7 +39,7 @@ Steps:
 Each student can be given a unique id by a smart contract where only the smart contract knows the information of the students. 
 
 For selection of questions:
- Each question in the question pool can be given a unique number. Then a smart contract not manipulated by anyone can be given the range of numbers and total number of questions to select for each section through randomness on the day of the exam. 
+ Each question in the question pool can be given a unique number. Then a smart contract using ChainLinks VRF, can be given the range of numbers assigned to the questions and the total number of questions to select for each section through randomness on the day of the exam. 
 Or for a more complex way, because the exams are online, each student gets a question given to them by the smart contract and this question is stored alongside their id.
 For identification of students:
 Each student will be given that unique id the contract assigned their info. Upon arrival to the test centre, all the student needs to do is secretly enter their id/ fingerprint  into the smart contract using a UI. The smart contract returns  the face of the student and the examiner uses that to verify that the student is indeed not a fake (LOL).
