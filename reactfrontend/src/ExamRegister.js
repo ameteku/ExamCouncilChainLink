@@ -45,8 +45,7 @@ function ExamRegister(){
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div className="row">
+                <div className="row">
                 <div className="col-lg-12 text-center">
                     <div className="input-group">
                         <div className="inputAdd">
@@ -55,6 +54,7 @@ function ExamRegister(){
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     )

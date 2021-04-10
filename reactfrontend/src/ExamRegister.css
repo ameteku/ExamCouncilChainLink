@@ -22,6 +22,36 @@
 
   }
 
+  .header {
+      margin-top: 50px;
+      margin-bottom: 50px;
+  }
+
+  .examsList  {
+      margin: auto;
+      width: 50%;
+      border: solid mediumaquamarine;
+      border-radius: 0.5em;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+  }
+
+  .examItem {
+      font-size: large;
+      padding: 10px;
+      font-weight: bolder;
+       
+  }
+ li:hover{
+        background-color: mediumaquamarine;
+        color: white;
+        text-decoration: none;
+  }
+
+  Link {
+    text-decoration: none;
+  }
+
   .button {
     background-color: transparent;
     height: 20px;

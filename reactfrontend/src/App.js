@@ -9,6 +9,7 @@ import Student from "./Student";
 import Scores from "./Scores";
 import ExamRegister from "./ExamRegister";
 import ExamSelect from "./ExamSelect";
+import ExamWrite from "./ExamWrite";
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/student/scores" component={Scores}/>
       <Route exact path="/student/examregister" component={ExamRegister}/>
       <Route exact path="/student/examselect" component={ExamSelect}/>
+      <Route exact path="/student/examwrite" component={ExamWrite}/>
     </div>
   );
 }
