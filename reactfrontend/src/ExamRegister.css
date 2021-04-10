@@ -77,4 +77,9 @@
     float: none;
     margin: auto;
     margin-top: 50px;
+    border: solid;
+}
+
+tr {
+    border:none;
 }

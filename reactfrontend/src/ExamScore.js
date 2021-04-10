@@ -2,7 +2,7 @@ import React from "react";
 
 function ExamScore(props){
 
-    return (<tr>
+    return (<tr className="tr">
         <td>{props.name}</td>
         <td>{props.score}</td>
     </tr>)
