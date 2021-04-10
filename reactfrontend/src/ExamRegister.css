@@ -7,6 +7,12 @@
     width: 100%;
   }
 
+  .reg-button {
+    margin-top: 10px;
+    background-color:thistle;
+    border-color:thistle;
+  }
+
   .backBtn {
     margin-left: 0;
     margin-top: auto;
