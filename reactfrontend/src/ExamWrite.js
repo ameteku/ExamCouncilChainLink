@@ -8,8 +8,8 @@ function ExamWrite(){
     const [firstName,changeFirstName] = React.useState("Gianna");
     const [lastName,changeLastName] = React.useState("Torpey");
 
-    function makeQuestionAndInput(question){
-        return <QAndA question={question}/>
+    function makeQuestionAndInput(question,index){
+        return <QAndA key={index} question={question} number={index}/>
     }
     return(
         <div>
@@ -26,7 +26,10 @@ function ExamWrite(){
                 </div>
              </nav>
              <div className="questionAndAnswerPair">
-                {questions.map(makeQuestionAndInput)}
+             <ol>
+             {questions.map(makeQuestionAndInput)}
+             </ol>
+                
              </div>
         </div>
     )

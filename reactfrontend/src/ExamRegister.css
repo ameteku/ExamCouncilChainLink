@@ -10,9 +10,29 @@
 
   .question {
       text-align: left;
+      font-size: 25px;
+      background-color:#e6e5e5;
+      padding:20px;
+      border-radius: 0.2em;
+      border: solid;
+      border-color: #a0a0a0;
+      border-width: thin;
       
   }
 
+
+.answer {
+    box-sizing: border-box;
+    background-color: transparent;
+    border: solid;
+      border-color: #a0a0a0;
+      border-width: thin;
+    color: #000;
+    font-family: sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    padding:20px;
+}
   input {
     box-sizing: border-box;
     background-color: transparent;
@@ -33,6 +53,10 @@
   .header {
       margin-top: 50px;
       margin-bottom: 50px;
+  }
+
+  .Pair {
+      margin-bottom: 20px;
   }
 
   .examsList  {

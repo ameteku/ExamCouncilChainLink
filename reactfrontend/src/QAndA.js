@@ -6,9 +6,9 @@ function QAndA(props){
         updateAnswer(event.target.value);
     }
     return (
-        <div>
-            <p className="question">{props.question}</p>
-            <input value={currentAnswer} onChange={updateValue}/>
+        <div className="Pair">
+            <p className="question">Question {props.number+1}: {props.question}</p>
+            <textarea className="answer" value={currentAnswer} onChange={updateValue}/>
         </div>
     )
 }
