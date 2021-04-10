@@ -1,5 +1,6 @@
-pragma solidity >=0.7.0 <0.8.0;
+pragma solidity >=0.6.0 <0.8.0;
 pragma experimental ABIEncoderV2;
+import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
 struct ExamQuestion {
     uint id;
@@ -7,20 +8,24 @@ struct ExamQuestion {
     string answer;
 }
 
-contract Exam {
+contract  Exam is VRFConsumerBase{
+    
     uint id;
     address public creatorSignator;
-    ExamQuestion[] questions;
+    ExamQuestion[] questions; // redundant
+    string examPaperAddress;
     uint[]  questionNumbers;
-
+     bytes32 internal keyHash;
+    uint256 internal fee;
     
-    constructor (address bossMan) public {
-       //require(bytes(firstQuestion).length != 0);
-        //require(bytes(answer).length != 0);
-        require(bossMan != address(0));
-        
-        //questions.push(ExamQuestion(101,firstQuestion, answer));
-        // answers.push(answer);
+    uint256 public randomResult;
+    
+    constructor (address bossMan) VRFConsumerBase(
+           0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9, // VRF Coordinator
+          0xc5817D3e37bc74Da54985fdeE45F355012d719a4   // LINK Token
+        ) public {
+           keyHash = 0x6c3699283bda56ad74F6b855546325b68d482e983852a7a82979cc4807b641f4;
+    
         creatorSignator = bossMan;
         id = 200; //will be using chainlink vrf for this
     }
@@ -70,7 +75,7 @@ contract Exam {
 
     // this is option two where if the questions were stored of chain , each of them will be numbered and their range of numbers willcbe passed as an argument
     //into this function alongside the total number of questions needed. This will randomly select the questions to be used on the exam and send the selections back
-    function generateQuestions(uint totalExamQuestions, uint[2] memory questionNumberRange) external returns(uint[] memory, bool) {
+    function generateQuestions(uint totalExamQuestions, uint[2] memory questionNumberRange) public returns(uint[] memory, bool) {
         require(creatorSignator == msg.sender);
         require(totalExamQuestions != 0);
         require(questionNumberRange.length == 2);
@@ -79,7 +84,7 @@ contract Exam {
         //uint[] memory examQuestions;
         for(uint i =0; i <totalExamQuestions;) {
             bool duplicate = false;
-            questionSelected = 200000000 % questionNumberRange[1];
+           // questionSelected = ;
 
             for(uint b = 0; b< questions.length ; b++) {
                 if(questions[b].id == questionSelected) {
@@ -116,5 +121,22 @@ contract Exam {
         require(msg.sender == creatorSignator);
         return id;
     }
+    
+    
+    /*
+    * functions for using chainlink requestRandomness
+    */
+    
+    
+    function getRandomNumber(uint256 userProvidedSeed) public returns (bytes32 requestId) {
+        
+        require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
+        return requestRandomness(keyHash, fee, userProvidedSeed);
+    }
+   
+    function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
+        randomResult = randomness;
+    }
+    
     
 }
