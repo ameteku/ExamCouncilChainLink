@@ -1,7 +1,8 @@
 pragma solidity >=0.7.0 <0.8.0;
-pragma abicoder v2;
 import './Exam.sol';
 import './Candidate.sol';
+pragma abicoder v2;
+
 
 contract ExamCouncil {
     address bossAddy;
@@ -17,9 +18,6 @@ contract ExamCouncil {
                         exams[firstExamId] =  Exam(msg.sender);
                         examIds.push(firstExamId);
                     }
-        
-        
-       
     }
     
 //     function writeExam(string memory candidateId, string memory fingerprint, string memory examId) 
@@ -68,7 +66,7 @@ contract ExamCouncil {
 //     }
 // }
 
-    function registerAsCandidate(string memory examId) external returns(string memory) {
+    function registerAsCandidate(string memory examId, address student) public returns(address) {
         bool isExam = false;
         for(uint i = 0; i < examIds.length; i++) {
             if(keccak256(abi.encodePacked(examId)) == keccak256(abi.encodePacked(examIds[i]))) {
@@ -76,21 +74,22 @@ contract ExamCouncil {
                 break;
             }
         }
+
         if(isExam) {
-        Candidate newCandidate = new Candidate(msg.sender, examId,bossAddy);
-        
+        Candidate newCandidate = new Candidate(student, examId,bossAddy);
+        candidates.push(newCandidate);
         address name = address(newCandidate);
-        msg.sender.call("addCandidateAddress");
+        return name;
         }
-        else {
-            return ("Exam not available");
-        }
+        
+        return address(0);
         
     }
     
     function addExam(string memory examId) public {
-        require( msg.sender == bossAddy);
-        exams[examId] = new Exam(bossAddy);
+
+        //require( msg.sender == bossAddy);
+        exams[examId] = new Exam(msg.sender);
         examIds.push(examId);
         
     }

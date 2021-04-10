@@ -1,5 +1,6 @@
 pragma solidity >=0.7.0 <0.8.0;
 pragma experimental ABIEncoderV2;
+import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
 struct ExamQuestion {
     uint id;
@@ -7,17 +8,21 @@ struct ExamQuestion {
     string answer;
 }
 
-contract Exam {
+contract  Exam is VRFConsumerBase{
+    
     uint id;
     address public creatorSignator;
     ExamQuestion[] questions;
     uint[]  questionNumbers;
 
     
-    constructor (address bossMan) public {
+    constructor (address bossMan) VRFConsumerBase(
+            0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9, // VRF Coordinator
+            0xa36085F69e2889c224210F603D836748e7dC0088  // LINK Token
+        ) public {
        //require(bytes(firstQuestion).length != 0);
         //require(bytes(answer).length != 0);
-        require(bossMan != address(0));
+        //require(bossMan != address(0));
         
         //questions.push(ExamQuestion(101,firstQuestion, answer));
         // answers.push(answer);
@@ -115,6 +120,22 @@ contract Exam {
     function getId() public view returns(uint) {
         require(msg.sender == creatorSignator);
         return id;
+    }
+    
+    
+    /*
+    * functions for using chainlink requestRandomness
+    */
+    
+    
+    function getRandomNumber(uint256 userProvidedSeed) public returns (bytes32 requestId) {
+        
+        require(LINK.balanceOf(address(this)) >= fee, "Not enough LINK - fill contract with faucet");
+        return requestRandomness(keyHash, fee, userProvidedSeed);
+    }
+   
+    function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
+        randomResult = randomness;
     }
     
 }
