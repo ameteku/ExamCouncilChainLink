@@ -1,13 +1,14 @@
 import React from "react";
 import questions from "./Questions";
 import QAndA from "./QAndA";
-import { useLocation, useParams } from "react-router";
+import {Link} from "react-router-dom";
 
 function ExamWrite(props){
-    const [firstName,changeFirstName] = React.useState("Gianna");
-    const [lastName,changeLastName] = React.useState("Torpey");
+    const studentDetails = props.location.studentDetails || {};
+    const {firstName,lastName} = studentDetails;
     const { examName, examID} =
     (props.location && props.location.examDetails) || {};
+    console.log(props.location);
     function makeQuestionAndInput(question,index){
         return <QAndA key={index} question={question} number={index}/>
     }
@@ -26,6 +27,7 @@ function ExamWrite(props){
                 </div>
              </nav>
              <div className="questionAndAnswerPair">
+             <button className="backBtn"><Link to={{pathname:"/student/examselect",studentDetails}}>Go Back</Link></button>
              <ol>
              {questions.map(makeQuestionAndInput)}
              </ol>
