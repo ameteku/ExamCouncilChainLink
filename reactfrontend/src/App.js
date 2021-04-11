@@ -10,12 +10,17 @@ import Scores from "./Scores";
 import ExamRegister from "./ExamRegister";
 import ExamSelect from "./ExamSelect";
 import ExamWrite from "./ExamWrite";
+import TeacherMarking from "./TeacherMarking";
 
 function App() {
   const  [logInInfo,updateLogInInfo] = React.useState({isLoggedIn:false,firstName:"",lastName:"",studentID:""});
   const history = useHistory()
   function redirect (){
     history.push("/student/home");
+  }
+
+  function redirectLogIn(){
+    history.push("/");
   }
 
   console.log(logInInfo);
@@ -34,6 +39,11 @@ function App() {
           updateLogInInfo({isLoggedIn:true,firstName:data.firstName,lastName:data.lastName,studentID:data.studentID});
           redirect();
       });
+  }
+
+  function logOut(){
+    updateLogInInfo({isLoggedIn:false,firstName:"",lastName:"",studentID:""});
+    redirectLogIn();
   }
 
   function registerUser(studentID, firstName, lastName, password){
@@ -65,13 +75,14 @@ function App() {
   }
   return (
     <div className="App">
-      <Route exact path="/" component={()=><Login updateUserInfo={logIn} userInfo={logInInfo}/>}/>
+      <Route exact path="/" component={()=><Login logOut={logOut} updateUserInfo={logIn} userInfo={logInInfo}/>}/>
       <Route exact path="/register" component={()=><Register updateUserInfo={registerUser} userInfo={logInInfo}/>}/>
-      <Route exact path="/student/home" component={()=><Student userInfo={logInInfo}/>}/>
-      <Route exact path="/student/scores" component={()=><Scores userInfo={logInInfo}/>}/>
-      <Route exact path="/student/examregister" component={()=><ExamRegister userInfo={logInInfo}/>}/>
-      <Route exact path="/student/examselect" component={()=><ExamSelect userInfo={logInInfo}/>}/>
+      <Route exact path="/student/home" component={()=><Student logOut={logOut} userInfo={logInInfo}/>}/>
+      <Route exact path="/student/scores" component={()=><Scores logOut={logOut} userInfo={logInInfo}/>}/>
+      <Route exact path="/student/examregister" component={()=><ExamRegister logOut={logOut}  userInfo={logInInfo}/>}/>
+      <Route exact path="/student/examselect" component={()=><ExamSelect logOut={logOut} userInfo={logInInfo}/>}/>
       <Route exact path="/student/examwrite" component={ExamWrite}/>
+      <Route exact path="/teacher/marksubmission" component={TeacherMarking}/>
     </div>
   );
 }

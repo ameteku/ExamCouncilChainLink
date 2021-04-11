@@ -36,6 +36,63 @@ app.get('/loginStudent/:studentID/:password', (req,res)=> {
     })
 });
 
+app.get("/studentsubmissions/:examid",(req,res)=>{
+    const examID = req.params.examid;
+    var studentIDsforExam = [];
+    Submission.find({exam_id: examID},function(err,submissions){
+        if(err){
+            console.log(err);
+        }
+        else{
+            submissions.forEach(function(submission,index){
+                studentIDsforExam.push(submission.student_id);
+            });
+            res.send(studentIDsforExam);
+        }
+    });
+});
+
+app.get("/singlestudentsubmission/:studentid/:examid",(req,res)=>{
+    const examID = req.params.examid;
+    const studentID = req.params.studentid;
+    Submission.findOne({exam_id: examID,student_id:studentID},function(err,submission){
+        if(err){
+            console.log(err);
+        }
+        else{
+            Exam.findOne({exam_id: examID},function(err,exam){
+                if (err){
+                    console.log(err);
+                }
+                else {
+                    res.send({submission:submission, exam:exam});
+                }
+            })
+            
+        }
+    });
+});
+
+app.post("/updatestudentsubmission", (req,res)=>{
+    const examID = req.body.examid;
+    const studentID = req.body.studentid;
+    var feedback = {};
+    var score = 0;
+    const FS = Object.values(req.body.FS);
+    FS.forEach(function(value,index){
+        feedback = {...feedback,[index+1]:value.Feedback};
+        score = score + Number(value.Score);
+    });
+    Submission.updateOne({exam_id: examID,student_id:studentID},{score:score,feedback:feedback}, function(err){
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send({response:"All good!"});
+        }
+    });
+});
+
 app.get("/getexam/:exam", (req, res) => {
     const examName = req.params.exam;
     console.log(examName);
@@ -76,12 +133,12 @@ app.post("/registerStudent", (req,res)=>{
 
 app.get('/getexamsforstudent/:studentID', (req, res) => {
     const studentID = req.params.studentID;
-    Student.find({student_id: studentID},function (err,students){
+    Student.findOne({student_id: studentID},function (err,student){
         if (err){
             console.log(err)
         }
         else {
-            res.send({exams: students[0].examsArray});
+            res.send({exams: student.examsArray});
         }
     }); 
   });
@@ -112,13 +169,13 @@ app.post('/submitExam', (req, res)=>{
             console.log(err);
         }
         else{
-            
             if (exam){
                 const sub = new Submission({
                     student_id: studentID,
                     exam_id: exam.exam_id,
                     answers: examAnswers,
-                    score: 0
+                    score: 0,
+                    feedback: {}
                 })
                 sub.save(function(err){
                     if(err){

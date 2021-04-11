@@ -21,7 +21,6 @@ function Login(props){
 
     return (
         <div className="login text-center">
-
             <form class="form-signin">
                 <h1> Welcome</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
