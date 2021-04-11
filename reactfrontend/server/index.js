@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Student = require("./db/models/student.js");
+const {Exam, examsSchema} = require("./db/models/exam.js");
+const Marker = require("./db/models/marker.js");
+const Submission = require("./db/models/submission.js");
 var cors = require('cors')
 const app = express();
 app.use(cors())
@@ -9,48 +13,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb://localhost:27017/testexamcouncilDB",{ useUnifiedTopology: true, useNewUrlParser: true });
 
-const studentSchema = new mongoose.Schema({
-    student_id: String,
-    first_name: String,
-    last_name: String,
-    public_add: String,
-    examsArray: Array,
-    pw: String,
-    photos: String
-});
-
-const examsSchema = new mongoose.Schema({
-    exam_id: String,
-    questionsArray: Array,
-    exam_name: String
-});
-
-const markersSchema = new mongoose.Schema({
-    marker_id: String,
-    first_name: String,
-    last_name: String,
-    public_add: String,
-    exam: examsSchema,
-    pw: String
-});
 
 
-const submissionSchema = new mongoose.Schema({
-    student_id: String,
-    exam: examsSchema,
-    answers: Array,
-    score: Number
-});
-
-const Student = mongoose.model("Student", studentSchema);
-const Marker = mongoose.model("Marker", markersSchema);
-const Exam = mongoose.model("Exam", examsSchema);
-const Submission = mongoose.model("Submission", submissionSchema);
-
-
-
-app.post('/getexamsforstudent', (req, res) => {
-    const studentID = req.body.studentID;
+app.get('/getexamsforstudent/:studentID', (req, res) => {
+    const studentID = req.params.studentID;
     Student.find({id: studentID},function (err,students){
         if (err){
             console.log(err)
@@ -64,6 +30,9 @@ app.post('/getexamsforstudent', (req, res) => {
 app.post('/updateregistrationforstudent', (req, res)=>{
     const studentID = req.body.studentID;
     const exams = req.body.exams;
+    console.log(studentID);
+    console.log(exams);
+    res.send("All good!");
 })
 
 app.post('/submitExam', (req, res)=>{

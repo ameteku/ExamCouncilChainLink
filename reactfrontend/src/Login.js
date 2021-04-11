@@ -4,9 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 import {Link} from "react-router-dom";
 
-function Login(){
+function Login(props){
     function loginUser(event){
     }
+    console.log(props.updateInfo);
 
     return (
 

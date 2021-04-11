@@ -2,6 +2,7 @@ import React from "react";
 import './Student.css';
 import {Link} from "react-router-dom";
 import Scores from "./Scores";
+import Navbar from "./Navbar";
 
 
 function Student(){
@@ -23,14 +24,7 @@ function Student(){
     }
     return (
         <div>
-            <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Name_of_App</a>
-                <div class="dummy">
-                    {firstName} {lastName}
-                </div>
-            </div>
-        </nav>
+            <Navbar/>
        
         <header class="masthead bg-primary text-white text-center">
             <div class="container d-flex align-items-center flex-column">

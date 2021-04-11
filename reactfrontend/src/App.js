@@ -12,10 +12,10 @@ import ExamSelect from "./ExamSelect";
 import ExamWrite from "./ExamWrite";
 
 function App() {
-  
+  const [logInInfo,updateLogInInfo] = React.useState({});
   return (
     <div className="App">
-      <Route exact path="/" component={Login}/>
+      <Route exact path="/" component={()=><Login updateInfo={"Gianna"}/>}/>
       <Route exact path="/register" component={Register}/>
       <Route exact path="/student/home" component={Student}/>
       <Route exact path="/student/scores" component={Scores}/>
