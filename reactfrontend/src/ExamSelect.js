@@ -1,8 +1,10 @@
 import React from "react";
-//import exams from "./Exams";
 import {Link} from "react-router-dom";
 
 function ExamSelect(props){
+    const firstName = props.userInfo.firstName;
+    const lastName = props.userInfo.lastName;
+    const studentID = props.userInfo.studentID;
     const [exams,changeExams] = React.useState([]);
     React.useEffect(() => {
         async function getData(url) {
@@ -12,24 +14,24 @@ function ExamSelect(props){
             });
             return response.json(); // parses JSON response into native JavaScript objects
           }
-
-        
-          
-          getData('http://localhost:5000/getexamsforstudent/123')
+          getData(`http://localhost:5000/getexamsforstudent/${studentID}`)
             .then(data => {
                 changeExams(data.exams); // JSON data parsed by `data.json()` call
             });
       }, []);
-    const firstName = "Gianna";
-    const lastName = "Torpey";
+
     function makeListItem(exam){
         const examDetails = {
+            ...props,
             examName: exam,
             examID: "555",
         }
+        console.log(examDetails);
         return (
             <Link style={{ textDecoration: 'none' }} 
-            to="/student/examwrite">
+            to={{ 
+            pathname: "/student/examwrite", 
+            examDetails}}>
             <p className="examItem examToRegister">{exam}</p></Link>
         )
     }
@@ -47,7 +49,7 @@ function ExamSelect(props){
         <div className="nav-padding"></div>
         
             <div className="header nav-padding">
-            <button style={{marginRight:"260px"}}className="backBtn"><Link to={{pathname:"/student/home",}}>Go Back</Link></button>
+            
                 <h1>Select your exam</h1>
             </div>
             <div className="examsList">

@@ -5,5 +5,4 @@ const examsSchema = new mongoose.Schema({
     exam_name: String
 });
 
-const model = mongoose.model("exam", examsSchema); 
-module.exports = {model,examsSchema};
+module.exports = mongoose.model("exam", examsSchema); 

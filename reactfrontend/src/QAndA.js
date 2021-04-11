@@ -6,6 +6,7 @@ function QAndA(props){
     function updateValue(event){
         updateAnswer(event.target.value);
     }
+    
     return (
         <div className="Pair">
             <p className="question">Question {props.number+1}: {props.question}</p>
