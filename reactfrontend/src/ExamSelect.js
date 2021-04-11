@@ -1,5 +1,4 @@
 import React from "react";
-//import exams from "./Exams";
 import {Link} from "react-router-dom";
 
 function ExamSelect(props){
@@ -15,8 +14,6 @@ function ExamSelect(props){
             });
             return response.json(); // parses JSON response into native JavaScript objects
           }
-
-
           getData(`http://localhost:5000/getexamsforstudent/${studentID}`)
             .then(data => {
                 changeExams(data.exams); // JSON data parsed by `data.json()` call
