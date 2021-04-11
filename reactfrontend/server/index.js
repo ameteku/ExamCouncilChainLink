@@ -13,7 +13,37 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb://localhost:27017/testexamcouncilDB",{ useUnifiedTopology: true, useNewUrlParser: true });
 
+app.get('/loginStudent/:studentID/:password', (req,res)=> {
+    const studentID = req.params.studentID;
+    const password = req.params.password;
+    Student.findOne({id: studentID},function (err,student){
+        if (err){
+            console.log(err);
+        }
+        else{
+            res.send(student);
+        }
+    })
+});
 
+app.post("/registerStudent", (req,res)=>{
+
+    const studentSchema = new mongoose.Schema({
+        student_id: String,
+        first_name: String,
+        last_name: String,
+        public_add: String,
+        examsArray: Array,
+        pw: String,
+        photos: String
+    });
+
+    const studentID = req.body.studentID;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const pw = req.body.password;
+   
+});
 
 app.get('/getexamsforstudent/:studentID', (req, res) => {
     const studentID = req.params.studentID;

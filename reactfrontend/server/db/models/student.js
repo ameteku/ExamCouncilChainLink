@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const encrypt = require('mongoose-encryption');
 const studentSchema = new mongoose.Schema({
     student_id: String,
     first_name: String,
@@ -8,5 +9,8 @@ const studentSchema = new mongoose.Schema({
     pw: String,
     photos: String
 });
+
+const secret = "This is our secret";
+studentSchema.plugin(encrypt, {secret:secret});
 
 module.exports = mongoose.model("student", studentSchema);
