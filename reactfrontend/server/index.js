@@ -73,8 +73,8 @@ app.get("/getscores", (req, res) => {
     const studentID = "123";
 })
 
-app.get("/getexam", (req, res) => {
-    const examID = "123";
+app.post("/getexam", (req, res) => {
+    const examID = "phys2";
     Exam.find({exam_id: examID}, function(err,exams){
         if (err){
             console.log(err)

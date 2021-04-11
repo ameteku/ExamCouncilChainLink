@@ -1,24 +1,35 @@
 import React from "react";
-import exams from "./Exams";
+//import exams from "./Exams";
 import {Link} from "react-router-dom";
 
-
 function ExamSelect(props){
-    const studentDetails = props.location.studentDetails;
-    const {firstName,lastName} = studentDetails;
+    const [exams,changeExams] = React.useState([]);
+    React.useEffect(() => {
+        fetch("http://localhost:5000/getexamsforstudent", 
+        {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({studentID: '123'},
+            )
+        })
+          .then(results => results.json())
+          .then(data => {
+            changeExams(data.exams);
+          });
+      }, []);
+    const firstName = "Gianna";
+    const lastName = "Torpey";
     function makeListItem(exam){
         const examDetails = {
-            examName: exam.examName,
-            examID: exam.examID,
+            examName: exam,
+            examID: "555",
         }
         return (
             <Link style={{ textDecoration: 'none' }} 
             to="/student/examwrite" to={{ 
             pathname: "/student/examwrite", 
-            examDetails,
-            studentDetails
-            }}>
-            <p className="examItem examToRegister">{exam.examName}</p></Link>
+            examDetails}}>
+            <p className="examItem examToRegister">{exam}</p></Link>
         )
     }
 
@@ -36,16 +47,13 @@ function ExamSelect(props){
                 </div>
             </div>
         </nav>
-        <div className="nav-padding">
-            <div className="header">
+        <div className="nav-padding"></div>
+            <div className="header nav-padding">
                 <h1>Select your exam</h1>
             </div>
-            
             <div className="examsList">
-            <button className="backBtn"><Link to={{pathname:"/student/home",studentDetails}}>Go Back</Link></button>
                 {exams.map(makeListItem)}
             </div>
-        </div>
         </div>
     )
 }
