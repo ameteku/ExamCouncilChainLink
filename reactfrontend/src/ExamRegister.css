@@ -13,6 +13,18 @@
     border-color:thistle;
   }
 
+  .submitbtn {
+    display: block;
+    width: 30%;
+    background-color: rgb(46, 46, 131);
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    position: relative;
+    margin:0 auto;
+  }
+
   .backBtn {
     margin-left: 0;
     margin-top: auto;

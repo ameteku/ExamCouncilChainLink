@@ -1,7 +1,9 @@
+
 pragma solidity >=0.6.0 <0.8.0;
 import './Exam.sol';
 import './Candidate.sol';
 pragma experimental ABIEncoderV2;
+
 
 
 contract ExamCouncil {
@@ -77,26 +79,29 @@ mapping( address => Candidate) candidates;
 
         if(isExam) {
         Candidate newCandidate = new Candidate(student, examId,bossAddy);
+
          address name = address(newCandidate);
         candidates[name] = newCandidate;
-       
+
         return name;
         }
         
         return address(0);
         
+
     }
     
     // set candidate answers
     function setCandidateAnswers(string memory IPFSLink) public returns (bool) {
        candidates[msg.sender].setAnswerhash(IPFSLink);
+
     }
     
     function addExam(string memory examId) public {
 
         //require( msg.sender == bossAddy);
         exams[examId] = new Exam();
-        examIds.push(examId);
+
         
     }
     

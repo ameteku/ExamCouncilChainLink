@@ -6,11 +6,10 @@ import {Link} from "react-router-dom";
 
 function Login(){
     function loginUser(event){
-
     }
 
     return (
-        
+
         <div className="login text-center">
             <form class="form-signin">
             <h1> Welcome</h1>
