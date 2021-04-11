@@ -46,7 +46,7 @@ app.get('/loginMarker/:markerID/:password', (req,res)=> {
         else{
             if (marker){
             if (marker.pw === password){
-                res.send({markerID:marker.marker_id, examID:marker.examID, firstName:marker.first_name, lastName:marker.last_name, password:marker.pw});
+                res.send({markerID:marker.marker_id, examID:marker.exam_id, firstName:marker.first_name, lastName:marker.last_name, password:marker.pw});
             }
             else {
                 res.send({response:"Wrong Password"});
@@ -165,7 +165,7 @@ app.post("/registerMarker", (req,res)=>{
         first_name: firstName,
         last_name: lastName,
         public_add: "0x12",
-        exam_id: "examID",
+        exam_id: examID,
         pw: pw
     });
     marker.save(function(err){
@@ -205,6 +205,22 @@ app.post('/updateregistrationforstudent', (req, res)=>{
     console.log(exams);
     
 })
+
+app.get("/studentsubmissions/:examid",(req,res)=>{
+    const examID = req.params.examid;
+    var studentIDsforExam = [];
+    Submission.find({exam_id: examID},function(err,submissions){
+        if(err){
+            console.log(err);
+        }
+        else{
+            submissions.forEach(function(submission,index){
+                studentIDsforExam.push(submission.student_id);
+            });
+            res.send(studentIDsforExam);
+        }
+    });
+});
 
 app.post('/submitExam', (req, res)=>{
     const studentID = req.body.studentID;
