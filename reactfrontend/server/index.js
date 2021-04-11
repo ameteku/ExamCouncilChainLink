@@ -8,6 +8,12 @@ const Submission = require("./db/models/submission.js");
 var cors = require('cors')
 const app = express();
 app.use(cors())
+const fs = require('fs')
+
+//ipfs imports
+const IPFS = require('ipfs-api');
+conat ipfs = new IPFS({host: 'ipfs.infura.io', port: 5001, protocol: 'httpd'})
+
 
 const port =  5000;
 app.use(bodyParser.json());
@@ -63,6 +69,17 @@ const processEvent = (eventType, latestBlock, ) => {
 }
 
 
+// create exam submission file
+    const createFile = (studentId, submission) =>{
+    //create the submission file
+    const fileName = studentId + "_submission.txt";
+    fs.writeFile(fileName, submission, function (err) {
+  if (err) throw err;
+
+  
+  console.log('Saved studwent submission!');
+});
+    }
 //the processes to be run
 const mainContract = new web3.eth.Contract(mainABI, mainContractAddress);
 
@@ -176,6 +193,9 @@ app.get('/getexamsforstudent/:studentID', (req, res) => {
             console.log(err)
         }
         else {
+            // The exam length will be passed into the contract, an event containing the selected numbers will be returned and those questions will be passed to the student
+              //  const getExam = mainContract.methods.addStudent(firstName, lastName, 'random', ['sdfd','sdfs','sdfds','sdfd'])
+
             res.send({exams: students[0].examsArray});
         }
     }); 
@@ -217,12 +237,19 @@ app.post('/submitExam', (req, res)=>{
         else{
             
             if (exam){
+
                 const sub = new Submission({
                     student_id: studentID,
                     exam_id: exam.exam_id,
                     answers: examAnswers,
                     score: 0
                 })
+
+                createFile(req.body.answers,req.body.studentID).;
+
+
+                 const submitAnswers = mainContract.methods.addStudent(firstName, lastName, 'random', ['sdfd','sdfs','sdfds','sdfd'])
+
                 sub.save(function(err){
                     if(err){
                         console.log(err);
