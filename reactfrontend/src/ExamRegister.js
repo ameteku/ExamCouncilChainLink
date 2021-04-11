@@ -1,14 +1,16 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ExamRegister.css';
+import { Link, useHistory } from 'react-router-dom';
 
 function ExamRegister(props){
-    function updateRegistration(){
-
+    const studentID = "123";
+    function updateRegistration(examsID){
+       
     }
     const {firstName,lastName} = props.location.studentDetails || {};
     //fetch from database and use as React state
-    const [examsID,changeExamsID] = React.useState([]);
+    const [examsID, changeExamsID] = React.useState([]);
     function containsObject(obj, list) {
         var i;
         for (i = 0; i < list.length; i++) {
@@ -18,6 +20,20 @@ function ExamRegister(props){
         }
         return false;
     }
+
+    React.useEffect(() => {
+        fetch("http://localhost:5000/getexamsforstudent", 
+        {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({studentID: '123'},
+            )
+        })
+          .then(results => results.json())
+          .then(data => {
+            changeExamsID(data.exams);
+          });
+      }, []);
 
     function onAdd(exam){
         if (containsObject(exam,examsID)){
@@ -51,10 +67,6 @@ function ExamRegister(props){
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="#page-top">Name_of_App</a>
-                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
                 <div class="dummy">
                     {firstName} {lastName}
                 </div>
@@ -71,7 +83,11 @@ function ExamRegister(props){
                 </div>
                 <div className="row">
                     <div className="col-lg-12 text-center">
+                    
+                    <Link to="/student/home"><button className="submitbtn">Submit</button></Link>
+                    
                         <div className="dropdown">
+                        
                             <button className="dropbtn">Add</button>
                             <div className="dropdown-content">
                                 <a onClick={()=>onAdd("Geography")}>Geography</a>
