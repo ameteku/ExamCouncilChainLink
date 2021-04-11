@@ -69,12 +69,20 @@ app.get('/api/hello', (req, res) => {
 res.send({first:"Gianna",last:"Torpey"});
 });
 
-app.get("/getscores", (req, res) => {
+app.post("/getscores", (req, res) => {
     const studentID = "123";
-})
+    Submission.find({id: studentID},function (err,submissions){
+        if (err){
+            console.log(err)
+        }
+        else {
+            res.send({studentSubs: submissions});
+        }
+    });
+});
 
 app.post("/getexam", (req, res) => {
-    const examID = "phys2";
+    const examID = "geo1";
     Exam.find({exam_id: examID}, function(err,exams){
         if (err){
             console.log(err)

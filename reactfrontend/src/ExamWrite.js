@@ -29,7 +29,7 @@ function ExamWrite(props){
         <div>
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
                 <div class="container">
-                    <a class="navbar-brand js-scroll-trigger" href="#page-top">{}</a>
+                    <a class="navbar-brand js-scroll-trigger" href="#page-top">Name_of_App</a>
                     <div class="dummy">
                         {"Gianna"} {"Torpey"}
                     </div>
