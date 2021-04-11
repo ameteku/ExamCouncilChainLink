@@ -5,26 +5,14 @@ import Scores from "./Scores";
 import Navbar from "./Navbar";
 
 
-function Student(){
+function Student(props){
     const [firstName, setFirstName] = React.useState(null);
   const [lastName, setLastName] = React.useState(null);
   
-  React.useEffect(() => {
-    fetch('http://localhost:5000/api/hello')
-      .then(results => results.json())
-      .then(data => {
-        setFirstName(data.first);
-        setLastName(data.last);
-      });
-  }, []);
-
-    const studentDetails = {
-        firstName: firstName,
-        lastName: lastName
-    }
+  
     return (
         <div>
-            <Navbar/>
+            <Navbar firstName={props.userInfo.firstName} lastName={props.userInfo.lastName}/>
        
         <header class="masthead bg-primary text-white text-center">
             <div class="container d-flex align-items-center flex-column">
@@ -47,13 +35,13 @@ function Student(){
                     
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div className="option1">
-                        <h2><Link to={{pathname:"/student/examregister",studentDetails}}>Register Your Exams</Link></h2>
+                        <h2><Link to="/student/examregister">Register Your Exams</Link></h2>
                         </div>
                     </div>
                     
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div className="option2">
-                        <h2><Link to={{pathname:"/student/examselect",studentDetails}}>Write Your Exams</Link></h2>
+                        <h2><Link to="/student/examselect">Write Your Exams</Link></h2>
                         </div>
                     </div>
                     

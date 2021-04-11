@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
-import {Route, Link} from "react-router-dom";
+import {Route, Link, Redirect,useHistory} from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
@@ -13,9 +13,9 @@ import ExamWrite from "./ExamWrite";
 
 function App() {
   const  [logInInfo,updateLogInInfo] = React.useState({isLoggedIn:false,firstName:"",lastName:"",studentID:""});
-  function updateAndRedirect(first,last,id){
-    updateLogInInfo({isLoggedIn:true,firstName:first,lastName:last,studentID:id});
-    
+  const history = useHistory()
+  function redirect (){
+    history.push("/student/home");
   }
 
   console.log(logInInfo);
@@ -31,7 +31,8 @@ function App() {
     getData(`http://localhost:5000/loginStudent/${studentID}/${password}`)
       .then(data => {
           console.log(data); 
-          updateAndRedirect(data.firstName,data.lastName,data.studentID)// JSON data parsed by `data.json()` call
+          updateLogInInfo({isLoggedIn:true,firstName:data.firstName,lastName:data.lastName,studentID:data.studentID});
+          redirect();
       });
   }
 
