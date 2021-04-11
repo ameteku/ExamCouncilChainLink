@@ -94,6 +94,11 @@ app.post("/getexam", (req, res) => {
 });
 
 
-
+app.post("/registerstudent",(request,response)=>{
+    const studentFirstName = request.body.firstName;
+    const studentLastName = request.body.lastName;
+    const studentId = request.body.id;
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
+

@@ -3,16 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Register.css";
 import { Link } from "react-router-dom";
 
-import IPFS from "ipfs" ;
+import IPFS from "ipfs";
 const { globSource } = IPFS;
 
 function Register() {
-
-   
-        
     function registerUser(event) {}
-    return ( 
-        <
+    return ( <
         div className = "login text-center" >
         <
         form class = "form-signin" >
@@ -56,57 +52,62 @@ function Register() {
         <
         label
         for = "inputPassword"
-        class = "sr-only" > 
-        Password  <
-        /label><
+        class = "sr-only" >
+        Password { " " } <
+        /label>{" "} <
         input type = "password"
         id = "inputPassword"
         class = "form-control"
         placeholder = "Password"
-        required /
-        >
+        required / >
         <
         div class = "checkbox mb-3" > < /div>{" "} <
         button class = "btn btn-lg btn-primary btn-block"
         onClick = { registerUser }
-        type = "submit" > 
-        Register  <
+        type = "submit" >
+        Register { " " } <
         /button>{" "} <
-        Link to = "/" >  <
-        button class = "reg-button btn btn-lg btn-primary btn-block "
-        type = "submit" onClick = "uploadImage()" > { " " }
+        Link to = "/" >
+        <
+        input type = "file"
+        id = "file-input"
+        onInput = "uploadImage()"
+        accept = "image/*" /
+        >
+        <
+        button class = "reg-button btn btn-lg btn-primary btn-block"
+        type = "submit" >
         Back to Login { " " } <
-        /button> < /
-        Link > 
-        <p class = "mt-5 mb-3 text-muted" > & copy; 2021 < /p>{" "}
-        <input onChange={uploadImage} type="file" id ="file-input" accept="image/*" />
-          
-         </form > { " " } <
+        /button>{" "} < /
+        Link > { " " } <
+        p class = "mt-5 mb-3 text-muted" > & copy; 2021 < /p>{" "} < /
+        form > { " " } <
         /div>
     );
 }
-function uploadImage () {
+
+function uploadImage() {
     console.log("Hiiiiiiiiiiiiiiiiiiiiiiiiiii");
     // console.log(event.target.value);
-    const fileInput  = document.getElementById("file-input");
-        
-    fileInput.addEventListener('input', (e) => pushFileToIPFS(e.target.files[0]));
-};
+    const fileInput = document.getElementById("file-input");
+
+    fileInput.addEventListener("input", (e) => pushFileToIPFS(e.target.files[0]));
+}
 
 //  ()=> {
 //     console.log("Hiiiiiiiiiiiiiiiiiiiiiiiiiii");
 //     const fileInput  = document.getelementById("file-input");
-        
+
 //     fileInput.addEventListener('change', (e) => pushFileToIPFS(e.target.files[0]));
 
 //  }
 
- const pushFileToIPFS = async (file) => {
-      const node = await  IPFS.create();
-      const result =await node.add(file);
-      console.log(result);
+const pushFileToIPFS = async(file) => {
+    const node = await IPFS.create();
+    const result = await node.add(file);
+    console.log(result);
 
-      return result;
- }
+    return result;
+};
 
 export default Register;
