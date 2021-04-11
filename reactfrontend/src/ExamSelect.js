@@ -12,9 +12,7 @@ function ExamSelect(props){
             });
             return response.json(); // parses JSON response into native JavaScript objects
           }
-
-        
-          
+  
           getData('http://localhost:5000/getexamsforstudent/123')
             .then(data => {
                 changeExams(data.exams); // JSON data parsed by `data.json()` call

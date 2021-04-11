@@ -21,6 +21,7 @@ function Login(props){
 
     return (
         <div className="login text-center">
+
             <form class="form-signin">
                 <h1> Welcome</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
@@ -31,8 +32,8 @@ function Login(props){
                 <button class="btn btn-lg btn-primary btn-block" onClick={loginUser} type="button">Sign in</button>
                 <Link to="/register"><button class="reg-button btn btn-lg btn-primary btn-block ">Register</button></Link>
                 <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
-            </form>
-        </div>
+                </form>
+            </div>
     )
 }
 

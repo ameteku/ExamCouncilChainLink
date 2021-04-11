@@ -16,38 +16,50 @@ mongoose.connect("mongodb://localhost:27017/testexamcouncilDB",{ useUnifiedTopol
 app.get('/loginStudent/:studentID/:password', (req,res)=> {
     const studentID = req.params.studentID;
     const password = req.params.password;
-    Student.findOne({id: studentID},function (err,student){
+    Student.findOne({student_id: studentID},function (err,student){
         if (err){
             console.log(err);
         }
         else{
-            res.send(student);
+            if (student.pw === password){
+                res.send({studentID:studentID, firstName:student.first_name, lastName:student.last_name});
+            }
+            else {
+                res.send({response:"Wrong Password"});
+            }
+            
         }
     })
 });
 
 app.post("/registerStudent", (req,res)=>{
-
-    const studentSchema = new mongoose.Schema({
-        student_id: String,
-        first_name: String,
-        last_name: String,
-        public_add: String,
-        examsArray: Array,
-        pw: String,
-        photos: String
-    });
-
     const studentID = req.body.studentID;
+    console.log(studentID);
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const pw = req.body.password;
-   
+    const student = new Student({
+        student_id: studentID,
+        first_name: firstName,
+        last_name: lastName,
+        public_add: "0x11",
+        examsArray: [],
+        pw: pw,
+        photos: "image2.jpg"
+    });
+    student.save(function(err){
+        if (err){
+            console.log(err)
+        }
+        else{
+            res.send({studentID:studentID, firstName:firstName, lastName:lastName, password:pw});
+        }
+    });
 });
 
 app.get('/getexamsforstudent/:studentID', (req, res) => {
     const studentID = req.params.studentID;
-    Student.find({id: studentID},function (err,students){
+    Student.find({student_id: studentID},function (err,students){
         if (err){
             console.log(err)
         }
@@ -93,7 +105,7 @@ res.send({first:"Gianna",last:"Torpey"});
 
 app.post("/getscores", (req, res) => {
     const studentID = "123";
-    Submission.find({id: studentID},function (err,submissions){
+    Submission.find({student_id: studentID},function (err,submissions){
         if (err){
             console.log(err)
         }
