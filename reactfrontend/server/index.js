@@ -19,24 +19,25 @@ const studentSchema = new mongoose.Schema({
     photos: String
 });
 
-const markersSchema = new mongoose.Schema({
-    marker_id: String,
-    first_name: String,
-    last_name: String,
-    public_add: String,
-    exam_id: String,
-    pw: String
-});
-
 const examsSchema = new mongoose.Schema({
     exam_id: String,
     questionsArray: Array,
     exam_name: String
 });
 
+const markersSchema = new mongoose.Schema({
+    marker_id: String,
+    first_name: String,
+    last_name: String,
+    public_add: String,
+    exam: examsSchema,
+    pw: String
+});
+
+
 const submissionSchema = new mongoose.Schema({
     student_id: String,
-    exam_id: String,
+    exam: examsSchema,
     answers: Array,
     score: Number
 });
@@ -64,6 +65,28 @@ app.post('/updateregistrationforstudent', (req, res)=>{
     const studentID = req.body.studentID;
     const exams = req.body.exams;
 })
+
+app.post('/submitExam', (req, res)=>{
+    const studentID = req.body.studentID;
+    const examID = req.body.examID;
+    const examAnswers = req.body.answers;
+    Exam.findOne({exam_id:examID},function(err,exam){
+        if(err){
+
+        }
+        else{
+            const sub = new Submission({
+                student_id: studentID,
+                exam_id: examID,
+                answers: examsAnswers,
+                score: 0
+            })
+            sub.save();
+        }
+    });
+    
+})
+
 
 app.get('/api/hello', (req, res) => {
 res.send({first:"Gianna",last:"Torpey"});
