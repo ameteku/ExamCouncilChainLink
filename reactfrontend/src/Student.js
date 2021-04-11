@@ -3,9 +3,19 @@ import './Student.css';
 import {Link} from "react-router-dom";
 import Scores from "./Scores";
 
+
 function Student(){
-    const [firstName,changeFirstName] = React.useState("Gianna");
-    const [lastName,changeLastName] = React.useState("Torpey");
+    const [firstName, setFirstName] = React.useState(null);
+  const [lastName, setLastName] = React.useState(null);
+  
+  React.useEffect(() => {
+    fetch('http://localhost:5000/api/hello')
+      .then(results => results.json())
+      .then(data => {
+        setFirstName(data.first);
+        setLastName(data.last);
+      });
+  }, []);
 
     const studentDetails = {
         firstName: firstName,
@@ -16,10 +26,6 @@ function Student(){
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="#page-top">Name_of_App</a>
-                <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
                 <div class="dummy">
                     {firstName} {lastName}
                 </div>

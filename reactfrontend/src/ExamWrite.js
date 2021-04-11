@@ -1,13 +1,26 @@
 import React from "react";
-import questions from "./Questions";
+//import questions from "./Questions";
 import QAndA from "./QAndA";
 import {Link} from "react-router-dom";
 
 function ExamWrite(props){
-    const studentDetails = props.location.studentDetails || {};
-    const {firstName,lastName} = studentDetails;
-    const { examName, examID} =
-    (props.location && props.location.examDetails) || {};
+    const [questions,changeQuestions] = React.useState([]);
+    //const studentDetails = props.location.studentDetails || {};
+    //const {firstName,lastName} = studentDetails;
+    //const { examName, examID} =
+    //(props.location && props.location.examDetails) || {};
+    React.useEffect(() => {
+        fetch("http://localhost:5000/getexam", 
+        {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            
+        })
+          .then(results => results.json())
+          .then(data => {
+            changeQuestions(data.examsQuestions);
+          });
+      }, []); 
     console.log(props.location);
     function makeQuestionAndInput(question,index){
         return <QAndA key={index} question={question} number={index}/>
@@ -16,18 +29,14 @@ function ExamWrite(props){
         <div>
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
                 <div class="container">
-                    <a class="navbar-brand js-scroll-trigger" href="#page-top">{examName}</a>
-                    <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                        Menu
-                        <i class="fas fa-bars"></i>
-                    </button>
+                    <a class="navbar-brand js-scroll-trigger" href="#page-top">Name_of_App</a>
                     <div class="dummy">
-                        {firstName} {lastName}
+                        {"Gianna"} {"Torpey"}
                     </div>
                 </div>
              </nav>
              <div className="questionAndAnswerPair">
-             <button className="backBtn"><Link to={{pathname:"/student/examselect",studentDetails}}>Go Back</Link></button>
+             <button className="backBtn"><Link to={{pathname:"/student/examselect",}}>Go Back</Link></button>
              <ol>
              {questions.map(makeQuestionAndInput)}
              </ol>
