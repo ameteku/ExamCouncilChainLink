@@ -4,12 +4,14 @@ import './ExamRegister.css';
 import { Link, useHistory } from 'react-router-dom';
 
 function ExamRegister(props){
-    const studentID = "123";
+    const firstName = props.userInfo.firstName;
+    const lastName = props.userInfo.lastName;
+    const studentID = props.userInfo.studentID;
+  
     function updateRegistration(examsID){
        
     }
     
-    const {firstName,lastName} = props.location.studentDetails || {};
     //fetch from database and use as React state
     const [examsID, changeExamsID] = React.useState([]);
     function containsObject(obj, list) {
@@ -22,6 +24,11 @@ function ExamRegister(props){
         return false;
     }
 
+    const history = useHistory()
+    function redirect (){
+        history.push("/student/home");
+    }
+
     React.useEffect(() => {
         async function getData(url) {
             // Default options are marked with *
@@ -31,9 +38,8 @@ function ExamRegister(props){
             return response.json(); // parses JSON response into native JavaScript objects
           }
 
-        
-          
-          getData('http://localhost:5000/getexamsforstudent/123')
+
+          getData(`http://localhost:5000/getexamsforstudent/${studentID}`)
             .then(data => {
                 changeExamsID(data.exams); // JSON data parsed by `data.json()` call
             });
@@ -54,16 +60,16 @@ function ExamRegister(props){
                 },
                 redirect: 'follow', // manual, *follow, error
                 referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-                body: JSON.stringify({exams:examsID}) // body data type must match "Content-Type" header
+                body: JSON.stringify({studentID:studentID, exams:examsID}) // body data type must match "Content-Type" header
               });
               return response.json(); // parses JSON response into native JavaScript objects
           }
           
         postData('http://localhost:5000/updateregistrationforstudent')
             .then(data => {
-                console.log(data); // JSON data parsed by `data.json()` call
+                console.log(data);
+                redirect(); // JSON data parsed by `data.json()` call
             });
-        console.log("Gianna");
     }
     function onAdd(exam){
         if (containsObject(exam,examsID)){

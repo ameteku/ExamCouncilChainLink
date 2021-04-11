@@ -72,9 +72,17 @@ app.get('/getexamsforstudent/:studentID', (req, res) => {
 app.post('/updateregistrationforstudent', (req, res)=>{
     const studentID = req.body.studentID;
     const exams = req.body.exams;
+    Student.updateOne({student_id:studentID},{examsArray:exams}, function(err){
+        if (err){
+            console.log(err);
+        }
+        else{
+            res.send({response:"All good!"});
+        }
+    });
     console.log(studentID);
     console.log(exams);
-    res.send("All good!");
+    
 })
 
 app.post('/submitExam', (req, res)=>{

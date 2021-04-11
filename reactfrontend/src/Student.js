@@ -6,13 +6,13 @@ import Navbar from "./Navbar";
 
 
 function Student(props){
-    const [firstName, setFirstName] = React.useState(null);
-  const [lastName, setLastName] = React.useState(null);
-  
+    const firstName = props.userInfo.firstName;
+    const lastName = props.userInfo.lastName;
+    const studentID = props.userInfo.studentID;
   
     return (
         <div>
-            <Navbar firstName={props.userInfo.firstName} lastName={props.userInfo.lastName}/>
+            <Navbar firstName={firstName} lastName={lastName}/>
        
         <header class="masthead bg-primary text-white text-center">
             <div class="container d-flex align-items-center flex-column">
