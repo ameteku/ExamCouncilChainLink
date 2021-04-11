@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
-const {Exam, examsSchema} = require("./exam");
 const submissionSchema = new mongoose.Schema({
     student_id: String,
-    exam: examsSchema,
+    exam_id: String,
     answers: Array,
     score: Number
 });

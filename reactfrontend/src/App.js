@@ -19,7 +19,7 @@ function App() {
   }
 
   console.log(logInInfo);
-  function logIn(studentID,password){
+  function logIn(studentID, password){
     console.log("success");
     async function getData(url) {
       const response = await fetch(url, {

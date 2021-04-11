@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Student = require("./db/models/student.js");
-const {Exam, examsSchema} = require("./db/models/exam.js");
+const Exam = require("./db/models/exam.js");
 const Marker = require("./db/models/marker.js");
 const Submission = require("./db/models/submission.js");
 var cors = require('cors')
@@ -12,6 +12,8 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb://localhost:27017/testexamcouncilDB",{ useUnifiedTopology: true, useNewUrlParser: true });
+
+
 
 app.get('/loginStudent/:studentID/:password', (req,res)=> {
     const studentID = req.params.studentID;
@@ -27,14 +29,27 @@ app.get('/loginStudent/:studentID/:password', (req,res)=> {
             else {
                 res.send({response:"Wrong Password"});
             }
-            
+          
         }
     })
 });
 
+app.get("/getexam/:exam", (req, res) => {
+    const examName = req.params.exam;
+    console.log(examName);
+    Exam.findOne({exam_name:examName}, function(err,exam){
+        if (err){
+            console.log(err)
+        }
+        else{
+            console.log(exam);
+            res.send(exam);
+        }
+    }); 
+});
+
 app.post("/registerStudent", (req,res)=>{
     const studentID = req.body.studentID;
-    console.log(studentID);
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const pw = req.body.password;
@@ -59,7 +74,6 @@ app.post("/registerStudent", (req,res)=>{
 
 app.get('/getexamsforstudent/:studentID', (req, res) => {
     const studentID = req.params.studentID;
-    console.log(studentID);
     Student.find({student_id: studentID},function (err,students){
         if (err){
             console.log(err)
@@ -104,7 +118,6 @@ app.post('/submitExam', (req, res)=>{
             sub.save();
         }
     });
-    
 })
 
 
@@ -120,18 +133,6 @@ app.post("/getscores", (req, res) => {
         }
         else {
             res.send({studentSubs: submissions});
-        }
-    });
-});
-
-app.post("/getexam", (req, res) => {
-    const examID = "geo1";
-    Exam.find({exam_id: examID}, function(err,exams){
-        if (err){
-            console.log(err)
-        }
-        else {
-            res.send({examsQuestions: exams[0].questionsArray});
         }
     });
 });

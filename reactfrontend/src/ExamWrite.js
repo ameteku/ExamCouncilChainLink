@@ -8,9 +8,22 @@ function ExamWrite(props){
     const firstName = props.location.examDetails.userInfo.firstName;
     const lastName = props.location.examDetails.userInfo.lastName;
     const studentID = props.location.examDetails.userInfo.studentID;
+
     const exam = props.location.examDetails.examName;
     const [questions,changeQuestions] = React.useState([]);
-
+    React.useEffect(() => {
+    async function getData(url) {
+        const response = await fetch(url, {
+          method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
+      }
+      
+      getData(`http://localhost:5000/getexam/${exam}/`)
+        .then(data => {
+            changeQuestions(data.questionsArray);
+        });
+    }, []); 
     var smth = {}
     function updateAnswers(answer, number){
         console.log(answer);
