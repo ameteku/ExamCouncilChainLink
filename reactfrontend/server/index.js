@@ -59,6 +59,7 @@ app.post("/registerStudent", (req,res)=>{
 
 app.get('/getexamsforstudent/:studentID', (req, res) => {
     const studentID = req.params.studentID;
+    console.log(studentID);
     Student.find({student_id: studentID},function (err,students){
         if (err){
             console.log(err)

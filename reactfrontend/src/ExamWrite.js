@@ -4,25 +4,14 @@ import QAndA from "./QAndA";
 import {Link} from "react-router-dom";
 
 function ExamWrite(props){
+    console.log(props)
+    const firstName = props.location.examDetails.userInfo.firstName;
+    const lastName = props.location.examDetails.userInfo.lastName;
+    const studentID = props.location.examDetails.userInfo.studentID;
+    const exam = props.location.examDetails.examName;
     const [questions,changeQuestions] = React.useState([]);
-    //const studentDetails = props.location.studentDetails || {};
-    //const {firstName,lastName} = studentDetails;
-    //const { examName, examID} =
-    //(props.location && props.location.examDetails) || {};
-    React.useEffect(() => {
-        fetch("http://localhost:5000/getexam", 
-        {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            
-        })
-          .then(results => results.json())
-          .then(data => {
-            changeQuestions(data.examsQuestions);
-          });
-      }, []); 
-    console.log(props.location);
-    var smth = {1:"",2:"",3:""}
+
+    var smth = {}
     function updateAnswers(answer, number){
         console.log(answer);
         console.log(number);
@@ -37,14 +26,13 @@ function ExamWrite(props){
         <div>
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
                 <div class="container">
-                    <a class="navbar-brand js-scroll-trigger" href="#page-top">Name_of_App</a>
+                    <a class="navbar-brand js-scroll-trigger" href="#page-top">{exam}</a>
                     <div class="dummy">
-                        {"Gianna"} {"Torpey"}
+                        {firstName} {lastName}
                     </div>
                 </div>
              </nav>
              <div className="questionAndAnswerPair">
-             <button className="backBtn"><Link to={{pathname:"/student/examselect",}}>Go Back</Link></button>
              <ol>
              {questions.map(makeQuestionAndInput)}
              </ol>

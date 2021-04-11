@@ -69,7 +69,7 @@ function App() {
       <Route exact path="/student/scores" component={()=><Scores userInfo={logInInfo}/>}/>
       <Route exact path="/student/examregister" component={()=><ExamRegister userInfo={logInInfo}/>}/>
       <Route exact path="/student/examselect" component={()=><ExamSelect userInfo={logInInfo}/>}/>
-      <Route exact path="/student/examwrite" component={()=><ExamWrite userInfo={logInInfo}/>}/>
+      <Route exact path="/student/examwrite" component={ExamWrite}/>
     </div>
   );
 }

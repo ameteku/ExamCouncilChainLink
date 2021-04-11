@@ -7,10 +7,6 @@ function ExamRegister(props){
     const firstName = props.userInfo.firstName;
     const lastName = props.userInfo.lastName;
     const studentID = props.userInfo.studentID;
-  
-    function updateRegistration(examsID){
-       
-    }
     
     //fetch from database and use as React state
     const [examsID, changeExamsID] = React.useState([]);
