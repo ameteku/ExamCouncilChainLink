@@ -36,6 +36,29 @@ app.get('/loginStudent/:studentID/:password', (req,res)=> {
     })
 });
 
+app.get('/loginMarker/:markerID/:password', (req,res)=> {
+    const markerID = req.params.markerID;
+    const password = req.params.password;
+    Marker.findOne({marker_id: markerID},function (err,marker){
+        if (err){
+            console.log(err);
+        }
+        else{
+            if (marker){
+            if (marker.pw === password){
+                res.send({markerID:marker.marker_id, examID:marker.examID, firstName:marker.first_name, lastName:marker.last_name, password:marker.pw});
+            }
+            else {
+                res.send({response:"Wrong Password"});
+            }
+        }
+        else {
+            res.send({response:"User does not exist"});
+        }
+        }
+    })
+});
+
 app.get("/studentsubmissions/:examid",(req,res)=>{
     const examID = req.params.examid;
     var studentIDsforExam = [];
@@ -127,6 +150,30 @@ app.post("/registerStudent", (req,res)=>{
         }
         else{
             res.send({studentID:studentID, firstName:firstName, lastName:lastName, password:pw});
+        }
+    });
+});
+
+app.post("/registerMarker", (req,res)=>{
+    const markerID = req.body.markerID;
+    const examID = req.body.examID;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const pw = req.body.password;
+    const marker = new Marker({
+        marker_id: markerID,
+        first_name: firstName,
+        last_name: lastName,
+        public_add: "0x12",
+        exam_id: "examID",
+        pw: pw
+    });
+    marker.save(function(err){
+        if (err){
+            console.log(err)
+        }
+        else{
+            res.send({markerID:markerID, examID:examID, firstName:firstName, lastName:lastName, password:pw});
         }
     });
 });
