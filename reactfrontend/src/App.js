@@ -59,6 +59,8 @@ function App() {
   postData('http://localhost:5000/registerStudent')
       .then(data => {
           console.log(data); // JSON data parsed by `data.json()` call
+          updateLogInInfo({isLoggedIn:true,firstName:firstName,lastName:lastName,studentID:studentID});
+          redirect();
       });
   }
   return (
