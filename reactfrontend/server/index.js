@@ -1,6 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Student = require("./db/models/student.js");
+const {Exam, examsSchema} = require("./db/models/exam.js");
+const Marker = require("./db/models/marker.js");
+const Submission = require("./db/models/submission.js");
 var cors = require('cors')
 const app = express();
 app.use(cors())
@@ -9,47 +13,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb://localhost:27017/testexamcouncilDB",{ useUnifiedTopology: true, useNewUrlParser: true });
 
-const studentSchema = new mongoose.Schema({
-    student_id: String,
-    first_name: String,
-    last_name: String,
-    public_add: String,
-    examsArray: Array,
-    pw: String,
-    photos: String
-});
-
-const markersSchema = new mongoose.Schema({
-    marker_id: String,
-    first_name: String,
-    last_name: String,
-    public_add: String,
-    exam_id: String,
-    pw: String
-});
-
-const examsSchema = new mongoose.Schema({
-    exam_id: String,
-    questionsArray: Array,
-    exam_name: String
-});
-
-const submissionSchema = new mongoose.Schema({
-    student_id: String,
-    exam_id: String,
-    answers: Array,
-    score: Number
-});
-
-const Student = mongoose.model("Student", studentSchema);
-const Marker = mongoose.model("Marker", markersSchema);
-const Exam = mongoose.model("Exam", examsSchema);
-const Submission = mongoose.model("Submission", submissionSchema);
 
 
-
-app.post('/getexamsforstudent', (req, res) => {
-    const studentID = req.body.studentID;
+app.get('/getexamsforstudent/:studentID', (req, res) => {
+    const studentID = req.params.studentID;
     Student.find({id: studentID},function (err,students){
         if (err){
             console.log(err)
@@ -63,7 +30,32 @@ app.post('/getexamsforstudent', (req, res) => {
 app.post('/updateregistrationforstudent', (req, res)=>{
     const studentID = req.body.studentID;
     const exams = req.body.exams;
+    console.log(studentID);
+    console.log(exams);
+    res.send("All good!");
 })
+
+app.post('/submitExam', (req, res)=>{
+    const studentID = req.body.studentID;
+    const examID = req.body.examID;
+    const examAnswers = req.body.answers;
+    Exam.findOne({exam_id:examID},function(err,exam){
+        if(err){
+
+        }
+        else{
+            const sub = new Submission({
+                student_id: studentID,
+                exam_id: examID,
+                answers: examsAnswers,
+                score: 0
+            })
+            sub.save();
+        }
+    });
+    
+})
+
 
 app.get('/api/hello', (req, res) => {
 res.send({first:"Gianna",last:"Torpey"});

@@ -5,17 +5,20 @@ import {Link} from "react-router-dom";
 function ExamSelect(props){
     const [exams,changeExams] = React.useState([]);
     React.useEffect(() => {
-        fetch("http://localhost:5000/getexamsforstudent", 
-        {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({studentID: '123'},
-            )
-        })
-          .then(results => results.json())
-          .then(data => {
-            changeExams(data.exams);
-          });
+        async function getData(url) {
+            // Default options are marked with *
+            const response = await fetch(url, {
+              method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+          }
+
+        
+          
+          getData('http://localhost:5000/getexamsforstudent/123')
+            .then(data => {
+                changeExams(data.exams); // JSON data parsed by `data.json()` call
+            });
       }, []);
     const firstName = "Gianna";
     const lastName = "Torpey";
@@ -26,9 +29,7 @@ function ExamSelect(props){
         }
         return (
             <Link style={{ textDecoration: 'none' }} 
-            to="/student/examwrite" to={{ 
-            pathname: "/student/examwrite", 
-            examDetails}}>
+            to="/student/examwrite">
             <p className="examItem examToRegister">{exam}</p></Link>
         )
     }
@@ -44,7 +45,9 @@ function ExamSelect(props){
             </div>
         </nav>
         <div className="nav-padding"></div>
+        
             <div className="header nav-padding">
+            <button style={{marginRight:"260px"}}className="backBtn"><Link to={{pathname:"/student/home",}}>Go Back</Link></button>
                 <h1>Select your exam</h1>
             </div>
             <div className="examsList">

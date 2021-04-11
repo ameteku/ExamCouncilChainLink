@@ -22,8 +22,16 @@ function ExamWrite(props){
           });
       }, []); 
     console.log(props.location);
+    var smth = {1:"",2:"",3:""}
+    function updateAnswers(answer, number){
+        console.log(answer);
+        console.log(number);
+        smth = {...smth,[number]:answer};
+        console.log(smth);
+    }
+
     function makeQuestionAndInput(question,index){
-        return <QAndA key={index} question={question} number={index}/>
+        return <QAndA onChange={updateAnswers} key={index} question={question} number={index}/>
     }
     return(
         <div>
