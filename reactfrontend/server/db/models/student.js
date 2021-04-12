@@ -12,6 +12,6 @@ const studentSchema = new mongoose.Schema({
 });
 
 const secret = "This is our secret";
-studentSchema.plugin(encrypt, {secret:secret, encryptedFields: ["pw"]});
+studentSchema.plugin(encrypt, {secret: secret, encryptedFields: ["pw"]});
 
 module.exports = mongoose.model("student", studentSchema);
