@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/studentsDB",{ useUnifiedTopology: true, useNewUrlParser: true });
-
+const mongoose = require("mongoose");
+const encrypt = require('mongoose-encryption');
 const studentSchema = new mongoose.Schema({
-    id: String,
+    student_id: String,
     first_name: String,
     last_name: String,
     public_add: String,
@@ -11,4 +10,7 @@ const studentSchema = new mongoose.Schema({
     photos: String
 });
 
-module.exports = mongoose.model("student", UserSchema);
+const secret = "This is our secret";
+studentSchema.plugin(encrypt, {secret:secret, encryptedFields: ["pw"]});
+
+module.exports = mongoose.model("student", studentSchema);

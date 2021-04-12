@@ -1,32 +1,35 @@
 import React from "react";
-//import exams from "./Exams";
 import {Link} from "react-router-dom";
 
 function ExamSelect(props){
+    const firstName = props.userInfo.firstName;
+    const lastName = props.userInfo.lastName;
+    const studentID = props.userInfo.studentID;
     const [exams,changeExams] = React.useState([]);
     React.useEffect(() => {
-        fetch("http://localhost:5000/getexamsforstudent", 
-        {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({studentID: '123'},
-            )
-        })
-          .then(results => results.json())
-          .then(data => {
-            changeExams(data.exams);
-          });
+        async function getData(url) {
+            // Default options are marked with *
+            const response = await fetch(url, {
+              method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+          }
+          getData(`http://localhost:5000/getexamsforstudent/${studentID}`)
+            .then(data => {
+                changeExams(data.exams); // JSON data parsed by `data.json()` call
+            });
       }, []);
-    const firstName = "Gianna";
-    const lastName = "Torpey";
+
     function makeListItem(exam){
         const examDetails = {
+            ...props,
             examName: exam,
             examID: "555",
         }
+        console.log(examDetails);
         return (
             <Link style={{ textDecoration: 'none' }} 
-            to="/student/examwrite" to={{ 
+            to={{ 
             pathname: "/student/examwrite", 
             examDetails}}>
             <p className="examItem examToRegister">{exam}</p></Link>
@@ -44,7 +47,9 @@ function ExamSelect(props){
             </div>
         </nav>
         <div className="nav-padding"></div>
+        
             <div className="header nav-padding">
+            
                 <h1>Select your exam</h1>
             </div>
             <div className="examsList">

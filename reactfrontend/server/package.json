@@ -9,7 +9,9 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "ipfs-api": "^26.1.2",
     "mongoose": "^5.12.3",
+    "mongoose-encryption": "^2.1.0",
     "use-http": "^1.0.19"
   },
   "devDependencies": {
