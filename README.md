@@ -2,12 +2,9 @@
 A proposed way of setting up and administering examinations using blockchain
 
 
-
-
-
 An unbiased and exam fraud prevention System:
 
-The West African Examination Council(WAEC) which runs the multi national examination for both Junior High and Senior high schools has been using a failing system for sometime now. This has led to fraudulent practices at almost step in the process(from the creation of questions to the selection and acceptance of candidates into schools after the exams)  
+The West African Examination Council(WAEC) which runs the multi national examination for both Junior High and Senior high schools has been using a failing system for sometime now. This has led to fraudulent practices at almost step in the process(from the creation of questions to the selection and acceptance of candidates into schools after the exams) 
 There has been a long history of cheating scandals happening both within the headquarters of the institution and on the foregrounds. This has led to the drastic reduction and loss of trust in cretificates gotten from the Examinations( Although it is supposed to be the national official criteria for getting into your next level of school). 
 Solving this problem will make the examination fair for every student, giving a chance to not only the people with power  but the entire body of candidates to pass and get into their dream schools.
 
